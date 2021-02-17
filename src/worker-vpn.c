@@ -2683,7 +2683,7 @@ static void tls_watcher_cb (EV_P_ ev_io * w, int revents)
 
 	ret = tls_mainloop(ws, &tnow);
 	if (ret < 0) {
-		oclog(ws, LOG_ERR, "tls_mainloop failed %d", ret);
+		oclog(ws, LOG_DEBUG, "tls_mainloop failed %d", ret);
 		terminate_reason = REASON_ERROR;
 		cstp_send_terminate(ws);
 	}
@@ -2698,7 +2698,7 @@ static void tun_watcher_cb (EV_P_ ev_io * w, int revents)
 
 	ret = tun_mainloop(ws, &tnow);
 	if (ret < 0) {
-		oclog(ws, LOG_ERR, "tun_mainloop failed %d", ret);
+		oclog(ws, LOG_DEBUG, "tun_mainloop failed %d", ret);
 		terminate_reason = REASON_ERROR;
 		cstp_send_terminate(ws);
 	}
@@ -2714,7 +2714,7 @@ static void dtls_watcher_cb (EV_P_ ev_io * w, int revents)
 
 	ret = dtls_mainloop(ws, dtls, &tnow);
 	if (ret < 0) {
-		oclog(ws, LOG_ERR, "dtls_mainloop failed %d", ret);
+		oclog(ws, LOG_DEBUG, "dtls_mainloop failed %d", ret);
 		terminate_reason = REASON_ERROR;
 		cstp_send_terminate(ws);
 	}

@@ -907,12 +907,12 @@ static void terminate_server(main_server_st * s)
 {
 	unsigned total = 10;
 
-	mslog(s, NULL, LOG_INFO, "termination request received; waiting for children to die");
+	mslog(s, NULL, LOG_INFO, "termination request received; waiting for sessions to die");
 	kill_children(s);
 
 	while (waitpid(-1, NULL, WNOHANG) >= 0) {
 		if (total == 0) {
-			mslog(s, NULL, LOG_INFO, "not everyone died; forcing kill");
+			mslog(s, NULL, LOG_INFO, "not all sessions died; forcing kill");
 			kill(0, SIGKILL);
 		}
 		ms_sleep(500);
