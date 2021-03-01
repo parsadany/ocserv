@@ -567,7 +567,7 @@ int recv_msg_headers(int fd, uint8_t *cmd, unsigned timeout)
 	ret = recvmsg_timeout(fd, &hdr, 0, timeout);
 	if (ret == -1) {
 		int e = errno;
-		syslog(LOG_ERR, "%s:%u: recvmsg: %s", __FILE__, __LINE__,
+		syslog(LOG_WARNING, "%s:%u: recvmsg: %s", __FILE__, __LINE__,
 		       strerror(e));
 		return ERR_BAD_COMMAND;
 	}
