@@ -907,7 +907,7 @@ void vpn_server(struct worker_st *ws)
 			if (nrecvd == 0)
 				goto finish;
 			if (nrecvd != GNUTLS_E_PREMATURE_TERMINATION)
-				oclog(ws, LOG_ERR,
+				oclog(ws, LOG_WARNING,
 				      "error receiving client data");
 			exit_worker(ws);
 		}
@@ -1261,7 +1261,7 @@ int periodic_check(worker_st * ws, struct timespec *tnow, unsigned dpd)
 
 	if (ws->user_config->session_timeout_secs > 0) {
 		if (now - ws->session_start_time > ws->user_config->session_timeout_secs) {
-			oclog(ws, LOG_ERR,
+			oclog(ws, LOG_NOTICE,
 			      "session timeout reached for process (%d secs)",
 			      (int)(now - ws->session_start_time));
 			terminate = 1;
@@ -1286,7 +1286,7 @@ int periodic_check(worker_st * ws, struct timespec *tnow, unsigned dpd)
 	if (DTLS_ACTIVE(ws)->udp_state == UP_ACTIVE &&
 	    now - ws->last_msg_udp > DPD_TRIES * dpd && dpd > 0) {
 	    	unsigned data_mtu = DATA_MTU(ws, ws->link_mtu);
-		oclog(ws, LOG_ERR,
+		oclog(ws, LOG_NOTICE,
 		      "have not received any UDP message or DPD for long (%d secs, DPD is %d)",
 		      (int)(now - ws->last_msg_udp), dpd);
 
@@ -1303,7 +1303,7 @@ int periodic_check(worker_st * ws, struct timespec *tnow, unsigned dpd)
 		}
 	}
 	if (dpd > 0 && now - ws->last_msg_tcp > DPD_TRIES * dpd) {
-		oclog(ws, LOG_DEBUG,
+		oclog(ws, LOG_NOTICE,
 		      "have not received TCP DPD for long (%d secs)",
 		      (int)(now - ws->last_msg_tcp));
 		ws->buffer[0] = 'S';
@@ -1319,7 +1319,7 @@ int periodic_check(worker_st * ws, struct timespec *tnow, unsigned dpd)
 		CSTP_FATAL_ERR_CMD(ws, ret, exit_worker_reason(ws, REASON_ERROR));
 
 		if (now - ws->last_msg_tcp > DPD_MAX_TRIES * dpd) {
-			oclog(ws, LOG_ERR,
+			oclog(ws, LOG_NOTICE,
 			      "connection timeout (DPD); tearing down connection");
 			exit_worker_reason(ws, REASON_DPD_TIMEOUT);
 		}
@@ -2683,7 +2683,7 @@ static void tls_watcher_cb (EV_P_ ev_io * w, int revents)
 
 	ret = tls_mainloop(ws, &tnow);
 	if (ret < 0) {
-		oclog(ws, LOG_ERR, "tls_mainloop failed %d", ret);
+		oclog(ws, LOG_DEBUG, "tls_mainloop failed %d", ret);
 		terminate_reason = REASON_ERROR;
 		cstp_send_terminate(ws);
 	}
@@ -2698,7 +2698,7 @@ static void tun_watcher_cb (EV_P_ ev_io * w, int revents)
 
 	ret = tun_mainloop(ws, &tnow);
 	if (ret < 0) {
-		oclog(ws, LOG_ERR, "tun_mainloop failed %d", ret);
+		oclog(ws, LOG_DEBUG, "tun_mainloop failed %d", ret);
 		terminate_reason = REASON_ERROR;
 		cstp_send_terminate(ws);
 	}
@@ -2714,7 +2714,7 @@ static void dtls_watcher_cb (EV_P_ ev_io * w, int revents)
 
 	ret = dtls_mainloop(ws, dtls, &tnow);
 	if (ret < 0) {
-		oclog(ws, LOG_ERR, "dtls_mainloop failed %d", ret);
+		oclog(ws, LOG_DEBUG, "dtls_mainloop failed %d", ret);
 		terminate_reason = REASON_ERROR;
 		cstp_send_terminate(ws);
 	}
