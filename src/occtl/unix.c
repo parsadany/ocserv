@@ -733,7 +733,7 @@ void session_list(struct unix_ctx *ctx, SecmListCookiesReplyMsg *rep, FILE *out,
 {
 	unsigned i;
 	const char *username;
-	char tmpbuf[MAX_TMPSTR_SIZE];
+	char tmpbuf[MAX_TMPSTR_SIZE] = "";
 	time_t t;
 	struct tm *tm, _tm;
 	char str_since[65];
