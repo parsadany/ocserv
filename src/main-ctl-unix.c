@@ -147,6 +147,7 @@ int ctl_handler_init(main_server_st * s)
 		e = errno;
 		mslog(s, NULL, LOG_ERR, "could not bind socket '%s': %s",
 		      GETPCONFIG(s)->occtl_socket_file, strerror(e));
+		close(sd);
 		return -1;
 	}
 
@@ -162,6 +163,7 @@ int ctl_handler_init(main_server_st * s)
 		e = errno;
 		mslog(s, NULL, LOG_ERR, "could not listen to socket '%s': %s",
 		      GETPCONFIG(s)->occtl_socket_file, strerror(e));
+		close(sd);
 		return -1;
 	}
 
