@@ -438,6 +438,14 @@ int get_auth_handler2(worker_st * ws, unsigned http_ver, const char *pmsg, unsig
 		goto cleanup;
 	}
 
+#ifdef ADD_OWASP_HEADERS
+	ret = add_owasp_headers(ws);
+	if (ret < 0) {
+		ret = -1;
+		goto cleanup;
+	}
+#endif
+
 	ret = cstp_puts(ws, "\r\n");
 	if (ret < 0) {
 		ret = -1;
@@ -1088,6 +1096,14 @@ int post_common_handler(worker_st * ws, unsigned http_ver, const char *imsg)
 		     "Set-Cookie: webvpnc=; expires=Thu, 01 Jan 1970 22:00:00 GMT; path=/; Secure; HttpOnly\r\n");
 	if (ret < 0)
 		goto fail;
+
+#ifdef ADD_OWASP_HEADERS
+	ret = 
+		add_owasp_headers(ws);
+	if (ret < 0)
+		goto fail;
+#endif
+
 
 #ifdef ANYCONNECT_CLIENT_COMPAT	
 	if (WSCONFIG(ws)->xml_config_file) {
