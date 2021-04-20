@@ -438,7 +438,7 @@ int get_auth_handler2(worker_st * ws, unsigned http_ver, const char *pmsg, unsig
 		goto cleanup;
 	}
 
-#ifdef ADD_OWASP_HEADERS
+#ifdef ENABLE_OWASP_HEADERS
 	ret = add_owasp_headers(ws);
 	if (ret < 0) {
 		ret = -1;
@@ -1097,7 +1097,7 @@ int post_common_handler(worker_st * ws, unsigned http_ver, const char *imsg)
 	if (ret < 0)
 		goto fail;
 
-#ifdef ADD_OWASP_HEADERS
+#ifdef ENABLE_OWASP_HEADERS
 	ret = 
 		add_owasp_headers(ws);
 	if (ret < 0)

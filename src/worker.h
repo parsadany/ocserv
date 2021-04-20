@@ -422,7 +422,7 @@ int parse_proxy_proto_header(struct worker_st *ws, int fd);
 
 void cookie_authenticate_or_exit(worker_st *ws);
 
-#ifdef ADD_OWASP_HEADERS
+#ifdef ENABLE_OWASP_HEADERS
 int add_owasp_headers(worker_st * ws);
 #endif
 

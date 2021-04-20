@@ -863,7 +863,7 @@ void http_req_deinit(worker_st * ws)
 	ws->req.body = NULL;
 }
 
-#if defined(ADD_OWASP_HEADERS)
+#ifdef ENABLE_OWASP_HEADERS
 /* add_owasp_headers:
  * @ws: an initialized worker structure
  *

@@ -1931,7 +1931,7 @@ static int connect_handler(worker_st * ws)
 	ret = cstp_puts(ws, "HTTP/1.1 200 CONNECTED\r\n");
 	SEND_ERR(ret);
 
-#ifdef ADD_OWASP_HEADERS
+#ifdef ENABLE_OWASP_HEADERS
 	ret = add_owasp_headers(ws);
 	SEND_ERR(ret);
 #endif

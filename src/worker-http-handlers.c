@@ -58,7 +58,7 @@ static int send_headers(worker_st *ws, unsigned http_ver, const char *content_ty
 	    cstp_printf(ws, "Content-Type: %s\r\n", content_type) < 0 ||
 	    cstp_puts  (ws, "X-Transcend-Version: 1\r\n") < 0 ||
 	    cstp_printf(ws, "Content-Length: %u\r\n", content_length) < 0 ||
-#ifdef ADD_OWASP_HEADERS
+#ifdef ENABLE_OWASP_HEADERS
 		add_owasp_headers(ws) < 0 ||
 #endif				
 	    cstp_puts  (ws, "\r\n") < 0)
