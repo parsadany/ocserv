@@ -669,18 +669,6 @@ fi
 AM_CONDITIONAL(ENABLE_OIDC_AUTH,  test "x$enable_oidc_auth" = xyes)
 AM_CONDITIONAL(ENABLE_OIDC_AUTH_TESTS, test "x$enable_oidc_auth" = xyes)
 
-AC_ARG_ENABLE([owasp-headers],
-  [AS_HELP_STRING([--enable-owasp-headers],
-                  [whether to add owasp.org http security headers (default is no)])],
-  [enable_owasp_headers=$enableval],
-  [enable_owasp_headers=no]
-)
-
-if test "x$enable_owasp_headers" = xyes; then
-  AC_DEFINE([ENABLE_OWASP_HEADERS], 1, [Add OWASP default http headers to responses])
-fi
-AM_CONDITIONAL(ENABLE_OWASP_HEADERS_TESTS, test "x$enable_owasp_headers" = xyes)
-
 AC_CHECK_FILE(/proc/self/exe, AC_DEFINE([PROC_FS_SUPPORTED],[1], [procfs supported]), [])
 
 uid=$(id -u)

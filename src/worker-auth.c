@@ -438,13 +438,11 @@ int get_auth_handler2(worker_st * ws, unsigned http_ver, const char *pmsg, unsig
 		goto cleanup;
 	}
 
-#ifdef ENABLE_OWASP_HEADERS
 	ret = add_owasp_headers(ws);
 	if (ret < 0) {
 		ret = -1;
 		goto cleanup;
 	}
-#endif
 
 	ret = cstp_puts(ws, "\r\n");
 	if (ret < 0) {
@@ -1097,12 +1095,10 @@ int post_common_handler(worker_st * ws, unsigned http_ver, const char *imsg)
 	if (ret < 0)
 		goto fail;
 
-#ifdef ENABLE_OWASP_HEADERS
 	ret = 
 		add_owasp_headers(ws);
 	if (ret < 0)
 		goto fail;
-#endif
 
 
 #ifdef ANYCONNECT_CLIENT_COMPAT	

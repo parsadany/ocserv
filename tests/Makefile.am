@@ -180,9 +180,7 @@ check_PROGRAMS += gen_oidc_test_data
 dist_check_SCRIPTS += test-oidc
 endif
 
-if ENABLE_OWASP_HEADERS_TESTS
 dist_check_SCRIPTS += test-owasp-headers
-endif
 
 dist_check_SCRIPTS += test-replay
 

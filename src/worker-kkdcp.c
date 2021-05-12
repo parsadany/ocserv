@@ -273,13 +273,10 @@ int post_kkdcp_handler(worker_st *ws, unsigned http_ver)
 		goto fail;
 	}
 
-#ifdef ENABLE_OWASP_HEADERS
 	ret = add_owasp_headers(ws);
 	if (ret < 0) {
 		goto fail;
 	}
-#endif
-	
 
 	ret = cstp_puts(ws, "\r\n");
 	if (ret < 0) {
