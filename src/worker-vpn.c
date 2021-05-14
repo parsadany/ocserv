@@ -1931,6 +1931,9 @@ static int connect_handler(worker_st * ws)
 	ret = cstp_puts(ws, "HTTP/1.1 200 CONNECTED\r\n");
 	SEND_ERR(ret);
 
+	ret = add_owasp_headers(ws);
+	SEND_ERR(ret);
+
 	ret = cstp_puts(ws, "X-CSTP-Version: 1\r\n");
 	SEND_ERR(ret);
 

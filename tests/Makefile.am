@@ -180,6 +180,7 @@ check_PROGRAMS += gen_oidc_test_data
 dist_check_SCRIPTS += test-oidc
 endif
 
+dist_check_SCRIPTS += test-owasp-headers
 
 dist_check_SCRIPTS += test-replay
 

@@ -422,6 +422,8 @@ int parse_proxy_proto_header(struct worker_st *ws, int fd);
 
 void cookie_authenticate_or_exit(worker_st *ws);
 
+int add_owasp_headers(worker_st * ws);
+
 /* after that time (secs) of inactivity in the UDP part, connection switches to 
  * TCP (if activity occurs there).
  */
