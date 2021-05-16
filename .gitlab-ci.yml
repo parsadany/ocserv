@@ -394,9 +394,9 @@ minimal/Ubuntu20.04:
   script:
   - git submodule update --init
   - autoreconf -fvi
-  - ./configure --without-root-tests --without-nuttcp-tests $MINIMALCONFIG
+  - ./configure $MINIMALCONFIG
   - make -j$JOBS
-  - make check -j$JOBS
+  - make check -j$JOBS XFAIL_TESTS="lz4-compression lzs-compression"
   tags:
   - shared
   - linux
