@@ -789,7 +789,7 @@ void vpn_server(struct worker_st *ws)
 
 	/* do not allow this process to be traced. That
 	 * prevents worker processes tracing each other. */
-	if (GETPCONFIG(ws)->debug == 0)
+	if (GETPCONFIG(ws)->pr_dumpable != 1)
 		pr_set_undumpable("worker");
 	if (GETCONFIG(ws)->isolate != 0) {
 		ret = disable_system_calls(ws);
