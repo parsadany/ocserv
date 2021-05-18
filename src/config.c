@@ -830,6 +830,10 @@ static int cfg_ini_handler(void *_ctx, const char *section, const char *name, co
 		} else if (strcmp(name, "sec-mod-scale") == 0) {
 			if (!PWARN_ON_VHOST(vhost->name, "sec-mod-scale", sec_mod_scale))
 				READ_NUMERIC(vhost->perm_config.sec_mod_scale);
+		} else if (strcmp(name, "log-level") == 0) {
+			if (vhost->perm_config.debug == 0) {
+				READ_NUMERIC(vhost->perm_config.debug);
+			}
 		} else {
 			stage1_found = 0;
 		}
@@ -1553,6 +1557,7 @@ static const struct option long_options[] = {
 	{"foreground", 0, 0, 'f'},
 	{"no-chdir", 0, 0, OPT_NO_CHDIR},
 	{"help", 0, 0, 'h'},
+	{"traceable", 0, 0, 'x'},
 	{"version", 0, 0, 'v'},
 	{NULL, 0, 0, 0}
 };
@@ -1566,13 +1571,15 @@ void usage(void)
 	fprintf(stderr, "   -f, --foreground           Do not fork into background\n");
 	fprintf(stderr, "   -d, --debug=num            Enable verbose network debugging information\n");
 	fprintf(stderr, "				- it must be in the range:\n");
-	fprintf(stderr, "				  0 to 9999\n");
+	fprintf(stderr, "				  0 to 9\n");
 	fprintf(stderr, "   -c, --config=file          Configuration file for the server\n");
 	fprintf(stderr, "				- file must exist\n");
 	fprintf(stderr, "   -t, --test-config          Test the provided configuration file\n");
 	fprintf(stderr, "       --no-chdir             Do not perform a chdir on daemonize\n");
 	fprintf(stderr, "   -p, --pid-file=file        Specify pid file for the server\n");
 	fprintf(stderr, "   -v, --version              output version information and exit\n");
+	fprintf(stderr, "   -x, --traceable            Allow processes tracing\n");
+    fprintf(stderr, "               - use for debugging purposes only\n");
 	fprintf(stderr, "   -h, --help                 display extended usage information and exit\n\n");
 
 	fprintf(stderr, "Openconnect VPN server (ocserv) is a VPN server compatible with the\n");
@@ -1592,7 +1599,7 @@ int cmd_parser (void *pool, int argc, char **argv, struct list_head *head, bool 
 	assert(vhost != NULL);
 
 	while (1) {
-		c = getopt_long(argc, argv, "d:c:p:ftvh", long_options, NULL);
+		c = getopt_long(argc, argv, "d:c:p:ftvxh", long_options, NULL);
 		if (c == -1)
 			break;
 
@@ -1621,6 +1628,9 @@ int cmd_parser (void *pool, int argc, char **argv, struct list_head *head, bool 
 			case 'v':
 				print_version();
 				exit(0);
+			case 'x':
+				vhost->perm_config.pr_dumpable = 1;
+				break;
 		}
 	}
 

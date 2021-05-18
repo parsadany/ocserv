@@ -389,6 +389,7 @@ struct perm_cfg_st {
 	unsigned foreground;
 	unsigned no_chdir;
 	unsigned debug;
+	unsigned pr_dumpable;
 
 	char *ca;
 	char *dh_params_file;
