@@ -331,6 +331,8 @@ struct cfg_st {
 	char *xml_config_hash;
 #endif
 
+	unsigned client_bypass_protocol;
+
 	/* additional configuration files */
 	char *per_group_dir;
 	char *per_user_dir;

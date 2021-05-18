@@ -877,7 +877,9 @@ static int cfg_ini_handler(void *_ctx, const char *section, const char *name, co
 #ifdef ANYCONNECT_CLIENT_COMPAT
 	} else if (strcmp(name, "user-profile") == 0) {
 		READ_STRING(config->xml_config_file);
-#endif 
+#endif
+	} else if (strcmp(name, "client-bypass-protocol") == 0) {
+		READ_TF(config->client_bypass_protocol);
 	} else if (strcmp(name, "default-domain") == 0) {
 		READ_STRING(config->default_domain);
 	} else if (strcmp(name, "crl") == 0) {

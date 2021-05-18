@@ -2153,6 +2153,13 @@ static int connect_handler(worker_st * ws)
 	}
 	SEND_ERR(ret);
 
+	if (WSCONFIG(ws)->client_bypass_protocol) {
+		ret = cstp_puts(ws, "X-CSTP-Client-Bypass-Protocol: true\r\n");
+	} else {
+		ret = cstp_puts(ws, "X-CSTP-Client-Bypass-Protocol: false\r\n");
+	}
+	SEND_ERR(ret);
+
 	ret = send_routes(ws, req, ws->user_config->no_routes, ws->user_config->n_no_routes, 0);
 	SEND_ERR(ret);
 
