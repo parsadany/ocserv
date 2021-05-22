@@ -2226,15 +2226,12 @@ static int connect_handler(worker_st * ws)
 	}
 
 	if (!ws->user_config->has_session_timeout_secs) {
-		ret = cstp_puts(ws, "X-CSTP-Lease-Duration: none\r\n"
-				"X-CSTP-Session-Timeout: none\r\n");
+		ret = cstp_puts(ws, "X-CSTP-Session-Timeout: none\r\n");
 		SEND_ERR(ret);
 	} else {
 		time_t expiration = ws->session_start_time + ws->user_config->session_timeout_secs;
-		ret = cstp_printf(ws, "X-CSTP-Lease-Duration: %u\r\n"
-				  "X-CSTP-Session-Timeout: %u\r\n"
+		ret = cstp_printf(ws, "X-CSTP-Session-Timeout: %u\r\n"
 				  "X-CSTP-Session-Timeout-Remaining: %ld\r\n",
-				  ws->user_config->session_timeout_secs,
 				  ws->user_config->session_timeout_secs,
 				  MAX(expiration - now, 0));
 		SEND_ERR(ret);
