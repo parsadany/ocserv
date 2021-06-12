@@ -1443,7 +1443,7 @@ static int dtls_mainloop(worker_st * ws, struct dtls_st * dtls, struct timespec 
 						    tnow->tv_sec);
 				if (ret < 0) {
 					oclog(ws, LOG_INFO,
-					      "error parsing CSTP data");
+					      "error parsing DTLS data");
 					goto cleanup;
 				}
 			}
