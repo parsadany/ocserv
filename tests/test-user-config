@@ -37,7 +37,7 @@ rm -f ${TMPFILE1}
 rm -f ${TMPFILE2}
 
 update_config test-user-config.config
-launch_simple_server -d 1 -f -c "${CONFIG}"
+launch_simple_server -d 3 -f -c "${CONFIG}"
 PID=$!
 wait_server $PID
 

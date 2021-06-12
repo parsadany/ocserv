@@ -1443,7 +1443,7 @@ static int dtls_mainloop(worker_st * ws, struct dtls_st * dtls, struct timespec 
 						    tnow->tv_sec);
 				if (ret < 0) {
 					oclog(ws, LOG_INFO,
-					      "error parsing CSTP data");
+					      "error parsing DTLS data");
 					goto cleanup;
 				}
 			}
@@ -2482,14 +2482,13 @@ static int parse_data(struct worker_st *ws, uint8_t *buf, size_t buf_size,
 				ret = dtls_send(DTLS_ACTIVE(ws), buf, 1);
 			}
 
-			oclog(ws, LOG_TRANSFER_DEBUG,
-			      "received DTLS DPD; sent response (%d bytes)",
-			      ret);
-
 			if (ret < 0) {
-				oclog(ws, LOG_ERR, "could not send TLS data: %s",
-				      gnutls_strerror(ret));
-				return -1;
+				oclog(ws, LOG_TRANSFER_DEBUG,
+				      "received DTLS DPD; error in sending response: %s", gnutls_strerror(ret));
+			} else {
+				oclog(ws, LOG_TRANSFER_DEBUG,
+				      "received DTLS DPD; sent response (%d bytes)",
+				      ret);
 			}
 		}
 
@@ -2516,7 +2515,7 @@ static int parse_data(struct worker_st *ws, uint8_t *buf, size_t buf_size,
 		/* decompress */
 		if (is_dtls == 0) { /* CSTP */
 			if (ws->cstp_selected_comp == NULL) {
-				oclog(ws, LOG_ERR, "received compression data but no compression was negotiated");
+				oclog(ws, LOG_ERR, "received compressed data but no compression was negotiated");
 				return -1;
 			}
 
@@ -2524,7 +2523,7 @@ static int parse_data(struct worker_st *ws, uint8_t *buf, size_t buf_size,
 			oclog(ws, LOG_DEBUG, "decompressed %d to %d\n", (int)buf_size-8, (int)plain_size);
 		} else { /* DTLS */
 			if (ws->dtls_selected_comp == NULL) {
-				oclog(ws, LOG_ERR, "received compression data but no compression was negotiated");
+				oclog(ws, LOG_ERR, "received compressed data but no compression was negotiated");
 				return -1;
 			}
 

@@ -110,9 +110,7 @@ int disable_system_calls(struct worker_st *ws)
 	/* Socket wrapper tests use additional syscalls; only enable
 	 * them when socket wrapper is active */
 	if (getenv("SOCKET_WRAPPER_DIR") != NULL) {
-		ADD_SYSCALL(stat64, 0);
 		ADD_SYSCALL(readlink, 0);
-		ADD_SYSCALL(newfstatat, 0);
 	}
 
 	/* we use quite some system calls here, and in the end
@@ -176,6 +174,9 @@ int disable_system_calls(struct worker_st *ws)
 
 	ADD_SYSCALL(openat, 0);
 	ADD_SYSCALL(fstat, 0);
+	ADD_SYSCALL(stat, 0);
+	ADD_SYSCALL(stat64, 0);
+	ADD_SYSCALL(newfstatat, 0);
 	ADD_SYSCALL(lseek, 0);
 
 	ADD_SYSCALL(getsockopt, 0);
@@ -186,9 +187,6 @@ int disable_system_calls(struct worker_st *ws)
 	/* we need to open files when we have an xml_config_file setup on any vhost */
 	list_for_each(ws->vconfig, vhost, list) {
 		if (vhost->perm_config.config->xml_config_file) {
-			ADD_SYSCALL(stat, 0);
-			ADD_SYSCALL(stat64, 0);
-			ADD_SYSCALL(newfstatat, 0);
 			ADD_SYSCALL(open, 0);
 			ADD_SYSCALL(openat, 0);
 			break;
