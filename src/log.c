@@ -30,6 +30,44 @@
 #include <main.h>
 #include <sec-mod.h>
 
+/* Returns zero when the given priority is not sufficient
+ * for logging */
+static unsigned check_priority(int *priority, int debug_prio)
+{
+	switch(*priority) {
+		case LOG_ERR:
+		case LOG_WARNING:
+		case LOG_NOTICE:
+			break;
+		case LOG_DEBUG:
+			if (debug_prio < DEBUG_DEBUG)
+				return 0;
+			break;
+		case LOG_INFO:
+			if (debug_prio < DEBUG_INFO)
+				return 0;
+			break;
+		case LOG_HTTP_DEBUG:
+			if (debug_prio < DEBUG_HTTP)
+				return 0;
+	                *priority = LOG_INFO;
+			break;
+		case LOG_TRANSFER_DEBUG:
+			if (debug_prio < DEBUG_TRANSFERRED)
+				return 0;
+	                *priority = LOG_DEBUG;
+			break;
+		case LOG_SENSITIVE:
+			if (debug_prio < DEBUG_SENSITIVE)
+				return 0;
+	                *priority = LOG_DEBUG;
+			break;
+		default:
+			syslog(LOG_DEBUG, "unknown log level %d", *priority);
+        }
+
+        return 1;
+}
 
 void __attribute__ ((format(printf, 3, 4)))
     _oclog(const worker_st * ws, int priority, const char *fmt, ...)
@@ -46,28 +84,8 @@ void __attribute__ ((format(printf, 3, 4)))
 	else
 		debug_prio = GETPCONFIG(ws)->debug;
 
-	if (priority == LOG_DEBUG && debug_prio < DEBUG_DEBUG)
+	if (!check_priority(&priority, debug_prio))
 		return;
-
-	if (priority == LOG_INFO && debug_prio < DEBUG_INFO)
-		return;
-
-	if (priority == LOG_HTTP_DEBUG) {
-	    if (debug_prio < DEBUG_HTTP)
-                return;
-            else
-                priority = LOG_INFO;
-        } else if (priority == LOG_TRANSFER_DEBUG) {
-	    if (debug_prio < DEBUG_TRANSFERRED)
-                return;
-            else
-                priority = LOG_DEBUG;
-        } else if (priority == LOG_SENSITIVE) {
-	    if (debug_prio < DEBUG_SENSITIVE)
-                return;
-            else
-                priority = LOG_DEBUG;
-        }
 
 	ip = ws->remote_ip_str;
 
@@ -101,31 +119,14 @@ void __attribute__ ((format(printf, 4, 5)))
 	char name[MAX_USERNAME_SIZE+MAX_HOSTNAME_SIZE+3];
 	const char* ip = NULL;
 	va_list args;
-	int debug_prio;
+	int debug_prio = 1;
 	unsigned have_vhosts;
 
 	if (s)
 		debug_prio = GETPCONFIG(s)->debug;
-	else
-		debug_prio = 1;
 
-	if (priority == LOG_DEBUG && debug_prio < DEBUG_DEBUG)
+	if (!check_priority(&priority, debug_prio))
 		return;
-
-	if (priority == LOG_INFO && debug_prio < DEBUG_INFO)
-		return;
-
-	if (priority == LOG_HTTP_DEBUG) {
-	    if (debug_prio < DEBUG_HTTP)
-                return;
-            else
-                priority = LOG_DEBUG;
-        } else if (priority == LOG_TRANSFER_DEBUG) {
-	    if (debug_prio < DEBUG_TRANSFERRED)
-                return;
-            else
-                priority = LOG_DEBUG;
-        }
 
 	if (proc) {
 		ip = human_addr((void*)&proc->remote_addr, proc->remote_addr_len,
