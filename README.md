@@ -1,9 +1,11 @@
 # About
 
-This program is openconnect VPN server (ocserv), a server for the
-[openconnect VPN client](http://www.infradead.org/openconnect/).
-It follows the [openconnect protocol](https://gitlab.com/openconnect/protocol)
-and is believed to be compatible with CISCO's AnyConnect SSL VPN. 
+The Openconnect VPN server (ocserv) is an open source Linux SSL
+VPN server designed for organizations that require a remote access
+VPN with enterprise user management and control. It follows
+the [openconnect protocol](https://gitlab.com/openconnect/protocol)
+and is the counterpart of the [openconnect VPN client](http://www.infradead.org/openconnect/).
+It is also compatible with CISCO's AnyConnect SSL VPN. 
 
 The program consists of:
  1. ocserv, the main server application
@@ -26,52 +28,31 @@ configuration while ocserv-main will use the previous configuration.
 
 # Build dependencies
 
-Required dependencies (Debian pkg/Fedora pkg):
+## Debian/Ubuntu:
 ```
-libgnutls28-dev      / gnutls-devel
-libev-dev            / libev-devel
-```
-
-Optional dependencies that enable specific functionality:
-```
-TCP wrappers: libwrap0-dev        / tcp_wrappers-devel
-PAM:          libpam0g-dev        / pam-devel
-LZ4:          liblz4-dev          / lz4-devel
-seccomp:      libseccomp-dev      / libseccomp-devel
-occtl:        libreadline-dev     / readline-devel
-              libnl-route-3-dev   / libnl3-devel
-GSSAPI:       libkrb5-dev         / krb5-devel
-Radius:       libradcli-dev       / radcli-devel
-OIDC:	      libcurl4-gnutls-dev / libcurl-devel
-	      libcjose-dev        / cjose-devel
-	      libjansson-dev	  / jansson-devel
+# Required
+apt-get install -y libgnutls28-dev libev-dev
+# Development and Testing
+apt get install -y libpam0g-dev liblz4-dev libseccomp-dev \
+	libreadline-dev libnl-route-3-dev libkrb5-dev libradcli-dev \
+	libcurl4-gnutls-dev libcjose-dev libjansson-dev libprotobuf-c-dev \
+	libtalloc-dev libhttp-parser-dev protobuf-c-compiler gperf \
+	nuttcp lcov libuid-wrapper libpam-wrapper libnss-wrapper \
+	libsocket-wrapper gss-ntlmssp haproxy iputils-ping freeradius \
+	gawk gnutls-bin iproute2 yajl-tools tcpdump
 ```
 
-Dependencies for development, testing, or dependencies that can be skipped
-in an embedded system (e.g., because a replacement library is included):
-
+## Fedora/RHEL:
 ```
-libprotobuf-c-dev  / protobuf-c-devel
-libtalloc-dev      / libtalloc-devel
-libhttp-parser-dev / http-parser-devel
-protobuf-c-compiler/ protobuf-c
-gperf              / gperf
-nuttcp             / nuttcp
-lcov               / lcov
-libuid-wrapper     / uid_wrapper
-libpam-wrapper     / pam_wrapper
-libnss-wrapper     / nss_wrapper
-libsocket-wrapper  / socket_wrapper
-gss-ntlmssp        / gssntlmssp
-haproxy            / haproxy
-iputils-ping       / iputils
-freeradius	   / freeradius
-gawk		   / gawk
-gnutls-bin	   / gnutls-utils
-iproute2	   / iproute
-yajl-tools	   / yajl
-iproute2	   / iproute
-tcpdump      / tcpdump
+# Required
+yum install -y gnutls-devel libev-devel
+# Development and Testing
+yum install -y pam-devel lz4-devel libseccomp-devel readline-devel \
+	libnl3-devel krb5-devel radcli-devel libcurl-devel cjose-devel \
+	jansson-devel protobuf-c-devel libtalloc-devel http-parser-devel \
+	protobuf-c gperf nuttcp lcov uid_wrapper pam_wrapper nss_wrapper \
+	socket_wrapper gssntlmssp haproxy iputils freeradius gawk \
+	gnutls-utils iproute yajl tcpdump
 ```
 
 See [README-radius](doc/README-radius.md) for more information on Radius
@@ -128,12 +109,8 @@ Several configuration instruction are available in [the recipes repository](http
 
 # Profiling
 
-If you use ocserv on a server with significant load and you'd like to help
-improve it, you may help by sending profiling information. That includes
-the bottlenecks in software, so future optimizations could be spent on the
-real needs. 
-
-In a Linux system you can profile ocserv using the following command.
+To identify the bottlenecks in software under certain loads
+you can profile ocserv using the following command.
 ```
 # perf record -g ocserv
 ```
@@ -147,7 +124,7 @@ You may examine the output using:
 
 # Continuous Integration (CI)
 
-We utilize the gitlab-ci continuous integration system. It is used to test
+We use the gitlab-ci continuous integration system. It is used to test
 most of the Linux systems (see .gitlab-ci.yml),and is split in two phases,
 build image creation and compilation/test. The build image creation is done
 at the openconnect/build-images subproject and uploads the image at the gitlab.com
