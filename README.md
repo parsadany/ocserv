@@ -32,7 +32,7 @@ configuration while ocserv-main will use the previous configuration.
 ```
 # Required
 apt-get install -y libgnutls28-dev libev-dev
-# Development and Testing
+# Optional functionality and testing
 apt get install -y libpam0g-dev liblz4-dev libseccomp-dev \
 	libreadline-dev libnl-route-3-dev libkrb5-dev libradcli-dev \
 	libcurl4-gnutls-dev libcjose-dev libjansson-dev libprotobuf-c-dev \
@@ -46,7 +46,7 @@ apt get install -y libpam0g-dev liblz4-dev libseccomp-dev \
 ```
 # Required
 yum install -y gnutls-devel libev-devel
-# Development and Testing
+# Optional functionality and testing
 yum install -y pam-devel lz4-devel libseccomp-devel readline-devel \
 	libnl3-devel krb5-devel radcli-devel libcurl-devel cjose-devel \
 	jansson-devel protobuf-c-devel libtalloc-devel http-parser-devel \
