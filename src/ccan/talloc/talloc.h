@@ -950,7 +950,7 @@ void *talloc_autofree_context(void);
  * talloc_get_size - get the requested size of an allocation
  * @ctx: the talloc pointer whose allocation to measure.
  *
- * This function lets you know the amount of memory alloced so far by this
+ * This function lets you know the amount of memory allocated so far by this
  * context. It does NOT account for subcontext memory.
  *
  * See Also:

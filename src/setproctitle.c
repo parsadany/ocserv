@@ -27,7 +27,7 @@
 # if defined(__linux__)
 #  include <sys/prctl.h>
 
-/* This sets the proccess title as shown in top, but not in ps (*@#%@).
+/* This sets the process title as shown in top, but not in ps (*@#%@).
  * To change the ps name in Linux, one needs to do master black magic
  * trickery (see util-linux setproctitle).
  */

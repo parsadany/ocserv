@@ -2,7 +2,7 @@
 
  Anyone is welcome to contribute to ocserv. You can either take up
 tasks from our [planned list](https://gitlab.com/ocserv/ocserv/milestones),
-or suprise us with enhancement we didn't plan for. In all cases be prepared
+or surprise us with enhancement we didn't plan for. In all cases be prepared
 to defend and justify your enhancements, and get through few rounds
 of changes. 
 

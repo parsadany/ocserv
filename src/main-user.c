@@ -396,7 +396,7 @@ const char* script, *next_script = NULL;
 		return ERR_WAIT_FOR_SCRIPT;
 	} else {
 		/* we don't add a specific handler for SCRIPT_CONNECT and SCRIPT_HOST_UPDATE
-		 * childs. We rely on libev's child reaping of unwatched children.
+		 * children. We rely on libev's child reaping of unwatched children.
 		 */
 		return 0;
 	}

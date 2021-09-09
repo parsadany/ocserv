@@ -191,7 +191,7 @@ roam between networks without significant disruption in the VPN service.
 
 ## When compile with --enable-latency-stats
 
-The ocserv server gathers statistical data about the latency incurred while processing received DTLS packets. Due to the volume of data being collected, processing is perfomed in batches. Batch size is a tradeoff of memory usage and statistical accuracy. All values are stored in microseconds (10^-6 seconds).
+The ocserv server gathers statistical data about the latency incurred while processing received DTLS packets. Due to the volume of data being collected, processing is performed in batches. Batch size is a tradeoff of memory usage and statistical accuracy. All values are stored in microseconds (10^-6 seconds).
 
 * Latency samples are first batched by the ocserv-worker, which gathers LATENCY_SAMPLE_SIZE (1024) of latency data.
 
@@ -209,14 +209,14 @@ The ocserv server gathers statistical data about the latency incurred while proc
 
 ## Load Balancer integration
 
-Ocserv can be deployed behind a layer 3 load balancer to support high availabilty and scale. 
+Ocserv can be deployed behind a layer 3 load balancer to support high availability and scale. 
 
 ### Example load balancer configuration using keepalived.
 This is not intended as an exhaustive guide to configuring keepalived, but rather as a high level overview.
 
 * One or more hosts (directors) running keepalived, with a virtual IP assigned to them, optionally using VRRP to manage VIP failover (not shown here).
 
-* Three or more instances of ocserv running on hosts (real-server). Virtual IP assigned to the loopback interface with an ARP filter to prevent them from avertising.
+* Three or more instances of ocserv running on hosts (real-server). Virtual IP assigned to the loopback interface with an ARP filter to prevent them from advertising.
 
 * Define a iptables rule to tag incoming traffic to be load balanced:
 ```
