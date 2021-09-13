@@ -390,7 +390,7 @@ static-analyzers/Fedora:
   - autoreconf -fvi -Werror
   - scan-build ./configure
   - scan-build --status-bugs -o scan-build-src make -j$JOBS
-  - cppcheck --force -q -Isrc/ -Isrc/occtl -Igl/ -I. --error-exitcode=1 src/ -i src/inih
+  - cppcheck --force -q -Isrc/ -Isrc/occtl -Igl/ -I. --error-exitcode=1 src/ -i src/inih -USELF_TEST
   tags:
   - shared
   - linux
