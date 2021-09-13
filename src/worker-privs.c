@@ -200,6 +200,7 @@ int disable_system_calls(struct worker_st *ws)
 
 	// Add calls to support libev
 	ADD_SYSCALL(epoll_wait, 0);
+	ADD_SYSCALL(epoll_pwait, 0);
 	ADD_SYSCALL(epoll_create1, 0);
 	ADD_SYSCALL(epoll_ctl, 0);
 	ADD_SYSCALL(rt_sigaction, 0);
