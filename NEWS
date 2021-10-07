@@ -1,3 +1,8 @@
+* Version 1.1.4 (unreleased)
+- Added newfstatat() and epoll_pwait() to the accepted list of seccomp
+  calls. This improves compatibility with certain libcs and aarch64.
+
+
 * Version 1.1.3 (released 2021-06-02)
 - No longer close stdin and stdout on worker processes as they are
   already closed in main process (#394)
