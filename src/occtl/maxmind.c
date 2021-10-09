@@ -83,7 +83,7 @@ char *geo_lookup(const char *ip, char *buf, unsigned buf_size)
 		MMDB_lookup_result_s result =
 		    pMMDB_lookup_string(&mmdb, ip, &gai_error, &mmdb_error);
 		if (MMDB_SUCCESS == mmdb_error) {
-			/* If the lookup was successfull and an entry was found */
+			/* If the lookup was successful and an entry was found */
 			if (result.found_entry) {
 				memset(&entry_data, 0,
 				       sizeof(MMDB_entry_data_s));
@@ -117,7 +117,7 @@ char *geo_lookup(const char *ip, char *buf, unsigned buf_size)
 		MMDB_lookup_result_s result =
 		    pMMDB_lookup_string(&mmdb, ip, &gai_error, &mmdb_error);
 		if (MMDB_SUCCESS == mmdb_error) {
-			/* If the lookup was successfull and an entry was found */
+			/* If the lookup was successful and an entry was found */
 			if (result.found_entry) {
 				memset(&entry_data, 0,
 				       sizeof(MMDB_entry_data_s));

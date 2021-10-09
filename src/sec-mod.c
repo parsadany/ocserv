@@ -1056,7 +1056,7 @@ void sec_mod_server(void *main_pool, void *config_pool, struct list_head *vconfi
 		}
 
 		/* we use two fds for communication with main. The synchronous is for
-		 * ping-pong communication which each request is answered immediated. The
+		 * ping-pong communication where each request is answered immediately. The
 		 * async is for messages sent back and forth in no particular order */
 		if (FD_ISSET(cmd_fd_sync, &rd_set)) {
 			ret = serve_request_main(sec, cmd_fd_sync, buffer, buffer_size);

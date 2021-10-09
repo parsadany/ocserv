@@ -874,7 +874,7 @@ int get_cert_info(worker_st * ws)
 			return -1;
 	}
 
-	/* this is superflous. Verification has already been performed
+	/* this is superfluous. Verification has already been performed
 	 * during handshake. */
 	cert = gnutls_certificate_get_peers(ws->session, &ncerts);
 

@@ -54,7 +54,7 @@
 #define CO_USE_SIGCONTEXT
 
 /*
- * Use this in conjuction with CO_USE_SIGCONTEXT to use the sigaltstack
+ * Use this in conjunction with CO_USE_SIGCONTEXT to use the sigaltstack
  * environment (suggested when CO_USE_SIGCONTEXT is defined).
  */
 #if defined(HAVE_SIGALTSTACK)

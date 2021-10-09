@@ -209,7 +209,7 @@ void expire_client_entry(sec_mod_st *sec, client_entry_st * e)
 			del_client_entry(sec, e);
 		} else {
 			now = time(0);
-			/* We intentionally don't close the session immediatelly on
+			/* We intentionally don't close the session immediately on
 			 * REASON_USER_DISCONNECT, as some anyconect clients
 			 * explicitly disconnect with the intention to reconnect
 			 * seconds later. */
