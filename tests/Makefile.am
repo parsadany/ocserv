@@ -61,7 +61,7 @@ dist_check_SCRIPTS += haproxy-connect test-iroute test-multi-cookie test-pass-sc
 	test-cookie-invalidation test-user-config test-append-routes test-ban \
 	multiple-routes json test-udp-listen-host test-max-same-1 test-script-multi-user \
 	apple-ios ipv6-iface test-namespace-listen disconnect-user disconnect-user2 \
-	ping-leases test-ban-local test-client-bypass-protocol
+	ping-leases test-ban-local test-client-bypass-protocol ipv6-small-net
 
 if RADIUS_ENABLED
 dist_check_SCRIPTS += radius-group radius-otp
