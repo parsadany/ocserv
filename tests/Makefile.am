@@ -44,7 +44,7 @@ EXTRA_DIST = certs/ca-key.pem certs/ca.pem ns.sh common.sh certs/server-cert.pem
 	data/disconnect-user2.config data/ping-leases.config data/haproxy-proxyproto.config \
 	data/haproxy-proxyproto.cfg scripts/proxy-connectscript data/haproxy-proxyproto-v1.config \
 	data/haproxy-proxyproto-v1.cfg scripts/proxy-connectscript-v1 data/test-multiple-client-ip.config \
-	data/test-client-bypass-protocol.config
+	data/test-client-bypass-protocol.config asan.supp
 
 xfail_scripts =
 dist_check_SCRIPTS =  ocpasswd-test
@@ -190,7 +190,8 @@ TESTS =  $(check_PROGRAMS) $(dist_check_SCRIPTS) $(xfail_scripts)
 XFAIL_TESTS = $(xfail_scripts)
 
 TESTS_ENVIRONMENT = srcdir="$(srcdir)" \
-	top_builddir="$(top_builddir)"
+	top_builddir="$(top_builddir)" \
+	LSAN_OPTIONS=suppressions=asan.supp
 
 if DISABLE_ASAN_BROKEN_TESTS
 TESTS_ENVIRONMENT += DISABLE_ASAN_BROKEN_TESTS=1
