@@ -142,11 +142,10 @@ void steal_ip_leases(struct proc_st* proc, struct proc_st *thief)
 	}
 }
 
-static int is_ipv6_ok(main_server_st *s, struct sockaddr_storage *ip, struct sockaddr_storage *net, struct sockaddr_storage *subnet)
+static int is_ipv6_ok(main_server_st *s, struct sockaddr_storage *ip, struct sockaddr_storage *tun, struct sockaddr_storage *subnet)
 {
-	/* check that IP & mask don't match network - i.e., the network's IP is outside
-	 * that subnet; we use it in the tun device */
-	if (memcmp(SA_IN6_U8_P(subnet), SA_IN6_U8_P(net), 16) == 0) {
+	/* check that IP & mask don't match tun IP */
+	if (ip_cmp(subnet, tun) == 0) {
 		return 0;
 	}
 
@@ -400,6 +399,15 @@ int get_ipv6_lease(main_server_st* s, struct proc_st* proc)
 	for (i=0;i<sizeof(struct in6_addr);i++)
 		SA_IN6_U8_P(&network)[i] &= (SA_IN6_U8_P(&mask)[i]);
 
+	proc->ipv6 = talloc_zero(proc, struct ip_lease_st);
+	if (proc->ipv6 == NULL)
+		return ERR_MEM;
+
+	/* LIP = network address + 1 */
+	memcpy(&proc->ipv6->lip, &network, sizeof(struct sockaddr_in6));
+	SA_IN6_U8_P(&proc->ipv6->lip)[15] |= 1;
+
+	proc->ipv6->lip_len = sizeof(struct sockaddr_in6);
 
 	if (proc->config->explicit_ipv6) {
 		memset(&tmp, 0, sizeof(tmp));
@@ -408,12 +416,9 @@ int get_ipv6_lease(main_server_st* s, struct proc_st* proc)
 
 		if (ret != 1) {
 			mslog(s, NULL, LOG_ERR, "error reading explicit IP %s", proc->config->explicit_ipv6);
-			return -1;
+			ret = ERR_NO_IP;
+			goto fail;
 		}
-
-		proc->ipv6 = talloc_zero(proc, struct ip_lease_st);
-		if (proc->ipv6 == NULL)
-			return ERR_MEM;
 
         	((struct sockaddr_in6*)&tmp)->sin6_family = AF_INET6;
 		memcpy(&proc->ipv6->rip, &tmp, sizeof(struct sockaddr_in6));
@@ -423,7 +428,7 @@ int get_ipv6_lease(main_server_st* s, struct proc_st* proc)
 		for (i=0;i<sizeof(struct in6_addr);i++)
 			SA_IN6_U8_P(&proc->ipv6->sig)[i] = SA_IN6_U8_P(&proc->ipv6->rip)[i] & SA_IN6_U8_P(&subnet_mask)[i];
 
-		if (is_ipv6_ok(s, &tmp, &network, &proc->ipv6->sig) == 0) {
+		if (is_ipv6_ok(s, &tmp, &proc->ipv6->lip, &proc->ipv6->sig) == 0) {
 			mslog(s, proc, LOG_DEBUG, "cannot assign explicit IP %s; it is in use or invalid", 
 			      human_addr((void*)&tmp, sizeof(struct sockaddr_in6), buf, sizeof(buf)));
 			ret = ERR_NO_IP;
@@ -434,9 +439,6 @@ int get_ipv6_lease(main_server_st* s, struct proc_st* proc)
 	}
 
 	/* assign "random" IP */
-	proc->ipv6 = talloc_zero(proc, struct ip_lease_st);
-	if (proc->ipv6 == NULL)
-		return ERR_MEM;
 	proc->ipv6->db = &s->ip_leases;
 
   	memcpy(&tmp, &network, sizeof(tmp));
@@ -487,8 +489,8 @@ int get_ipv6_lease(main_server_st* s, struct proc_st* proc)
 		}
 
 		/* check if it exists in the hash table */
-		if (is_ipv6_ok(s, &rnd, &network, &proc->ipv6->sig) == 0) {
-			mslog(s, proc, LOG_DEBUG, "cannot assign local IP %s; it is in use or invalid", 
+		if (is_ipv6_ok(s, &rnd, &proc->ipv6->lip, &proc->ipv6->sig) == 0) {
+			mslog(s, proc, LOG_DEBUG, "cannot assign IP %s; it is in use or invalid",
 			      human_addr((void*)&rnd, sizeof(struct sockaddr_in6), buf, sizeof(buf)));
 			continue;
 		}
@@ -504,12 +506,6 @@ int get_ipv6_lease(main_server_st* s, struct proc_st* proc)
         } while(1);
 
  finish:
-	/* LIP = network address + 1 */
-	memcpy(&proc->ipv6->lip, &network, sizeof(struct sockaddr_in6));
-	SA_IN6_U8_P(&proc->ipv6->lip)[15] |= 1;
-
-	proc->ipv6->lip_len = sizeof(struct sockaddr_in6);
-
 	proc->ipv6->prefix = subnet_prefix;
 
 	return 0;

@@ -72,7 +72,7 @@ Ubuntu16.04:
   - ./configure --without-nuttcp-tests
   - make -j$JOBS
 # this version of openconnect doesn't work with IPv6 only
-  - make check -j$JOBS XFAIL_TESTS=ipv6-iface
+  - make check -j$JOBS XFAIL_TESTS="ipv6-iface ipv6-small-net"
   tags:
   - shared
   - linux
