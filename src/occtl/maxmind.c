@@ -155,8 +155,10 @@ char *geo_lookup(const char *ip, char *buf, unsigned buf_size)
 					}
 				}
 				if (coordinates == 2) {
-					asprintf(&coord, "%f,%f", latitude,
-						 longitude);
+					if (asprintf(&coord, "%f,%f", latitude,
+						     longitude) == -1) {
+						coord = NULL;
+					}
 				}
 			}
 
