@@ -121,7 +121,7 @@ crypt_int(const char *fpasswd, const char *username, const char *groupname,
 
 	fd = fopen(fpasswd, "r");
 	if (fd == NULL) {
-		fprintf(fd2, "%s:%s:%s\n", username, groupname, cr_passwd);
+		fprintf(fd2, "%s:%s:%s\n", username, groupname, cr_passwd); 
 	} else {
 		int found = 0;
 		while ((len = getline(&line, &line_size, fd)) > 0) {
@@ -131,7 +131,7 @@ crypt_int(const char *fpasswd, const char *username, const char *groupname,
 
 			l = p-line;
 			if (l == username_len && strncmp(line, username, l) == 0) {
-				fprintf(fd2, "%s:%s:%s\n", username, groupname, cr_passwd);
+				fprintf(fd2, "%s:%s:%s\n", username, groupname, cr_passwd); /* lgtm[cpp/cleartext-storage-file] */
 				found = 1;
 			} else {
 				fwrite(line, 1, len, fd2);
@@ -141,7 +141,7 @@ crypt_int(const char *fpasswd, const char *username, const char *groupname,
 		fclose(fd);
 
 		if (found == 0)
-			fprintf(fd2, "%s:%s:%s\n", username, groupname, cr_passwd);
+			fprintf(fd2, "%s:%s:%s\n", username, groupname, cr_passwd); /* lgtm[cpp/cleartext-storage-file] */
 	}
 
 	fclose(fd2);
