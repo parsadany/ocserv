@@ -260,7 +260,7 @@ typedef struct worker_st {
 	 *  data we can send to the client (i.e., MTU of the tun device,
 	 *  can be accessed using the DATA_MTU() macro and this value. */
 	unsigned link_mtu;
-	unsigned adv_link_mtu; /* the MTU advertized on connection setup */
+	unsigned adv_link_mtu; /* the MTU advertised on connection setup */
 
 	unsigned cstp_crypto_overhead; /* estimated overhead of DTLS ciphersuite + DTLS CSTP HEADER */
 	unsigned cstp_proto_overhead; /* UDP + IP header size */
