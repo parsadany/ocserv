@@ -1,0 +1,4 @@
+[codespell]
+skip = ./.git,*.pem
+ignore-words-list = ans,gir,siz,te
+uri-ignore-words-list = gord,ist
