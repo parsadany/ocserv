@@ -45,16 +45,12 @@ This tool uses unix domain sockets to connect to ocserv.
 The tool can be run interactively when run with no arguments. When arguments are given they are
 interpreted as commands. For example:
 
-```
-$ occtl show users
-```
+    $ occtl show users
 
 Any command line arguments to be used as options must precede the command (if any), as shown
 below.
 
-```
-$ occtl --json show users
-```
+    $ occtl --json show users
 
 ## Exit status
 

@@ -36,9 +36,7 @@ and handling of a 'plain' password file used by ocserv.
 ## FILES
 The password format of ocpasswd is as follows.
 
-```
-username:groupname:encoded-password
-```
+    username:groupname:encoded-password
 
 The crypt(3) encoding is used for the encoded-password.
 
@@ -46,21 +44,15 @@ The crypt(3) encoding is used for the encoded-password.
 
 ### Adding a user
 
-```
-$ ocpasswd -c ocpasswd my_username
-```
+    $ ocpasswd -c ocpasswd my_username
 
 ### Locking a user
 
-```
-$ ocpasswd -c ocpasswd -l my_username
-```
+    $ ocpasswd -c ocpasswd -l my_username
 
 ### Unlocking a user
 
-```
-$ ocpasswd -c ocpasswd -u my_username
-```
+    $ ocpasswd -c ocpasswd -u my_username
 
 ## Exit status
 

@@ -115,22 +115,20 @@ generate such CA.
 
 ### Generating the CA
 
-```
-$ certtool --generate-privkey --outfile ca-key.pem
-$ cat << _EOF_ >ca.tmpl
-cn = "VPN CA"
-organization = "Big Corp"
-serial = 1
-expiration_days = -1
-ca
-signing_key
-cert_signing_key
-crl_signing_key
-_EOF_
+    $ certtool --generate-privkey --outfile ca-key.pem
+    $ cat << _EOF_ >ca.tmpl
+    cn = "VPN CA"
+    organization = "Big Corp"
+    serial = 1
+    expiration_days = -1
+    ca
+    signing_key
+    cert_signing_key
+    crl_signing_key
+    _EOF_
 
-$ certtool --generate-self-signed --load-privkey ca-key.pem \
-           --template ca.tmpl --outfile ca-cert.pem
-```
+    $ certtool --generate-self-signed --load-privkey ca-key.pem \
+               --template ca.tmpl --outfile ca-cert.pem
 
 ### Generating a local server certificate
 
@@ -139,24 +137,22 @@ pair. The key generated is an RSA one, but different types
 can be used by specifying the 'ecdsa' or 'dsa' options to
 certtool.
 
-```
-$ certtool --generate-privkey --outfile server-key.pem
-$ cat << _EOF_ >server.tmpl
-cn = "VPN server"
-dns_name = "www.example.com"
-dns_name = "vpn1.example.com"
-#ip_address = "1.2.3.4"
-organization = "MyCompany"
-expiration_days = -1
-signing_key
-encryption_key #only if the generated key is an RSA one
-tls_www_server
-_EOF_
-  
-$ certtool --generate-certificate --load-privkey server-key.pem \
-           --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem \
-           --template server.tmpl --outfile server-cert.pem
-```
+    $ certtool --generate-privkey --outfile server-key.pem
+    $ cat << _EOF_ >server.tmpl
+    cn = "VPN server"
+    dns_name = "www.example.com"
+    dns_name = "vpn1.example.com"
+    #ip_address = "1.2.3.4"
+    organization = "MyCompany"
+    expiration_days = -1
+    signing_key
+    encryption_key #only if the generated key is an RSA one
+    tls_www_server
+    _EOF_
+      
+    $ certtool --generate-certificate --load-privkey server-key.pem \
+               --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem \
+               --template server.tmpl --outfile server-cert.pem
 
 From this point the clients need ca-cert.pem to be able to securely
 connect to the server.
@@ -166,20 +162,18 @@ with the signing_key option and another with the encryption_key.
 
 ### Generating an external CA-signed server certificate
 
-```
-$ certtool --generate-privkey --outfile server-key.pem
-$ cat << _EOF_ >server.tmpl
-cn = "My server"
-dns_name = "www.example.com"
-organization = "MyCompany"
-expiration_days = -1
-signing_key
-encryption_key #only if the generated key is an RSA one
-tls_www_server
-_EOF_
-$ certtool --generate-request --load-privkey server-key.pem \
-           --template server.tmpl --outfile server-cert.csr
-```
+    $ certtool --generate-privkey --outfile server-key.pem
+    $ cat << _EOF_ >server.tmpl
+    cn = "My server"
+    dns_name = "www.example.com"
+    organization = "MyCompany"
+    expiration_days = -1
+    signing_key
+    encryption_key #only if the generated key is an RSA one
+    tls_www_server
+    _EOF_
+    $ certtool --generate-request --load-privkey server-key.pem \
+               --template server.tmpl --outfile server-cert.csr
 
 At this point you need to provide the server-cert.csr to your CA,
 and they will send you the server certificate.
@@ -193,40 +187,36 @@ by a PIN and most clients are able to import (the 3DES cipher is used in
 the example because it is supported by far more devices than
 AES).
 
-```
-$ certtool --generate-privkey --outfile user-key.pem
-$ cat << _EOF_ >user.tmpl
-cn = "user"
-unit = "admins"
-expiration_days = 365
-signing_key
-tls_www_client
-_EOF_
-$ certtool --generate-certificate --load-privkey user-key.pem \
-           --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem \
-           --template user.tmpl --outfile user-cert.pem
-  
-$ certtool --to-p12 --load-privkey user-key.pem \
-           --pkcs-cipher 3des-pkcs12 \
-           --load-certificate user-cert.pem \
-           --outfile user.p12 --outder
-```
+    $ certtool --generate-privkey --outfile user-key.pem
+    $ cat << _EOF_ >user.tmpl
+    cn = "user"
+    unit = "admins"
+    expiration_days = 365
+    signing_key
+    tls_www_client
+    _EOF_
+    $ certtool --generate-certificate --load-privkey user-key.pem \
+               --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem \
+               --template user.tmpl --outfile user-cert.pem
+      
+    $ certtool --to-p12 --load-privkey user-key.pem \
+               --pkcs-cipher 3des-pkcs12 \
+               --load-certificate user-cert.pem \
+               --outfile user.p12 --outder
 
 ### Revoking a client certificate
 
 To revoke the previous client certificate, i.e., preventing the user from
 accessing the VPN resources prior to its certificate expiration, use:
 
-```
-$ cat << _EOF_ >crl.tmpl
-crl_next_update = 365
-crl_number = 1
-_EOF_
-$ cat user-cert.pem >>revoked.pem
-$ certtool --generate-crl --load-ca-privkey ca-key.pem \
-           --load-ca-certificate ca-cert.pem --load-certificate revoked.pem \
-           --template crl.tmpl --outfile crl.pem
-```
+    $ cat << _EOF_ >crl.tmpl
+    crl_next_update = 365
+    crl_number = 1
+    _EOF_
+    $ cat user-cert.pem >>revoked.pem
+    $ certtool --generate-crl --load-ca-privkey ca-key.pem \
+               --load-ca-certificate ca-cert.pem --load-certificate revoked.pem \
+               --template crl.tmpl --outfile crl.pem
 
 After that you may want to notify ocserv of the new CRL by using
 the HUP signal, or wait for it to reload it.
@@ -234,11 +224,9 @@ the HUP signal, or wait for it to reload it.
 When there are no revoked certificates an empty revocation list
 should be generated as follows.
 
-```
-$ certtool --generate-crl --load-ca-privkey ca-key.pem \
-           --load-ca-certificate ca-cert.pem \
-           --template crl.tmpl --outfile crl.pem
-```
+    $ certtool --generate-crl --load-ca-privkey ca-key.pem \
+               --load-ca-certificate ca-cert.pem \
+               --template crl.tmpl --outfile crl.pem
 
 ## IMPLEMENTATION NOTES
 Note that while this server utilizes privilege separation and all
@@ -258,9 +246,7 @@ to enable it on a Linux system.
 By default, if no other file is specified, ocserv looks for its configuration
 file at _/etc/ocserv/ocserv.conf_. An example configuration file follows.
 
-```
 @CONFIGFILE@
-```
 
 ## SEE ALSO
 

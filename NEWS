@@ -1,3 +1,7 @@
+* Version 1.1.5 (released 2021-11-17)
+- Fixed manpage output
+
+
 * Version 1.1.4 (released 2021-11-13)
 - Added newfstatat() and epoll_pwait() to the accepted list of seccomp
   calls. This improves compatibility with certain libcs and aarch64.
