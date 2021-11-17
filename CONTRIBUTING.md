@@ -39,7 +39,7 @@ which is only run during development.
 file in the repository. The goal is to have a test suite which runs for
 every new merge request prior to merging. There are no particular rules for
 the test targets, except for them being reliable and running in a reasonable
-timeframe (~1 hour).
+time frame (~1 hour).
 
 
 ## Reviewing code

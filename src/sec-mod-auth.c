@@ -902,7 +902,7 @@ void sec_auth_user_deinit(sec_mod_st *sec, client_entry_st *e)
 
 	vhost = e->vhost;
 
-	seclog(sec, LOG_DEBUG, "permamently closing session of user '%s' "SESSION_STR, e->acct_info.username, e->acct_info.safe_id);
+	seclog(sec, LOG_DEBUG, "permanently closing session of user '%s' "SESSION_STR, e->acct_info.username, e->acct_info.safe_id);
 	if (vhost->perm_config.acct.amod != NULL && vhost->perm_config.acct.amod->close_session != NULL && e->session_is_open != 0) {
 		vhost->perm_config.acct.amod->close_session(e->vhost_acct_ctx, e->auth_type, &e->acct_info, &e->saved_stats, e->discon_reason);
 	}
