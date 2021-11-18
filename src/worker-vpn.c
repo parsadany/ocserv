@@ -1244,7 +1244,7 @@ int periodic_check(worker_st * ws, struct timespec *tnow, unsigned dpd)
 	/* we set an alarm at each periodic check to prevent any
 	 * freezes in the worker due to an unexpected block (due to worker
 	 * bug or kernel bug). In that case the worker will be killed due
-	 * the the alarm instead of hanging. */
+	 * the alarm instead of hanging. */
 	terminate_reason = REASON_SERVER_DISCONNECT;
 	alarm(1800);
 

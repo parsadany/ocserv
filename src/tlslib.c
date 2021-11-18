@@ -862,7 +862,7 @@ int load_cert_files(main_server_st *s, struct vhost_cfg_st *vhost)
 		ret = gnutls_privkey_init(&key);
 		GNUTLS_FATAL_ERR(ret);
 
-		/* use use the vhost/config pool rather than main, to allow usage of the credentials
+		/* use the vhost/config pool rather than main, to allow usage of the credentials
 		 * after freeing s.
 		 */
 		cdata = talloc_zero(vhost->pool, struct key_cb_data);
