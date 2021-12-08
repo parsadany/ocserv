@@ -89,8 +89,8 @@ void update_fd_limits(main_server_st * s, unsigned main)
 void set_self_oom_score_adj(main_server_st * s)
 {
 #ifdef __linux__
-	const char proc_self_oom_adj_score_path[] = "/proc/self/oom_score_adj";
-	const char oom_adj_score_value[] = "1000";
+	static const char proc_self_oom_adj_score_path[] = "/proc/self/oom_score_adj";
+	static const char oom_adj_score_value[] = "1000";
 	size_t written = 0;
 	int fd;
 
