@@ -149,7 +149,7 @@ extern int syslog_open;
 /* Allow few seconds prior to cleaning up entries, to avoid any race
  * conditions when session control is enabled, as well as to allow
  * anyconnect clients to reconnect (they often drop the connection and
- * to to re-establish using the same cookie).
+ * re-establish using the same cookie).
  */
 #define AUTH_SLACK_TIME 15
 
