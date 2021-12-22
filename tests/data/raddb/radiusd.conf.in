@@ -105,7 +105,7 @@ run_dir = ${localstatedir}/run/${name}
 #	make
 #	make install
 #
-libdir = /usr/lib/freeradius
+libdir = @RADIUS_LIBDIR@/freeradius
 
 #  pidfile: Where to place the PID of the RADIUS server.
 #

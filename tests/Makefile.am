@@ -31,7 +31,7 @@ EXTRA_DIST = certs/ca-key.pem certs/ca.pem ns.sh common.sh certs/server-cert.pem
 	certs/crl.pem server-cert-rsa-pss data/test-gssapi-opt-cert.config data/test-ciphers.config \
 	cipher-common.sh data/config-per-group.config data/group-config/tost \
 	data/raddb/access_reject data/raddb/accounting_response data/raddb/access_challenge data/raddb/acct_users \
-	data/raddb/clients.conf data/raddb/radiusd.conf data/raddb/users \
+	data/raddb/clients.conf data/raddb/radiusd.conf.in data/raddb/users \
 	data/radiusclient/dictionary data/radiusclient/radiusclient.conf \
 	data/radiusclient/servers data/radius.config data/radius-group.config data/radius-otp.config \
 	data/test-udp-listen-host.config data/pam-kerberos/passdb.templ \
