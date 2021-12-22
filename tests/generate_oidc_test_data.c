@@ -258,13 +258,13 @@ void generate_config_files(const char *output_folder, cjose_jwk_t * key,
 int main(int argc, char **argv)
 {
 	char working_directory[1024];
-	const char audience[] = "SomeAudience";
-	const char issuer[] = "SomeIssuer";
-	const char user_name_claim[] = "preferred_user_name";
+	static const char audience[] = "SomeAudience";
+	static const char issuer[] = "SomeIssuer";
+	static const char user_name_claim[] = "preferred_user_name";
 	char kid[64];
-	const char user_name[] = "SomeUser";
-	const char typ[] = "JWT";
-	const char alg[] = "ES256";
+	static const char user_name[] = "SomeUser";
+	static const char typ[] = "JWT";
+	static const char alg[] = "ES256";
 	time_t now = time(NULL);
 
 	snprintf(kid, sizeof(kid), "key_%ld", now);
