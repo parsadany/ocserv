@@ -676,6 +676,13 @@ gid=$(id -g)
 AC_SUBST([ROOTUID], [$uid])
 AC_SUBST([ROOTGID], [$gid])
 
+if test -f /usr/lib64/freeradius/rlm_pam.so;then
+radius_libdir=/usr/lib64
+else
+radius_libdir=/usr/lib
+fi
+AC_SUBST([RADIUS_LIBDIR], [$radius_libdir])
+
 AC_CONFIG_FILES([
 	Makefile
 	src/version.inc
@@ -685,9 +692,11 @@ AC_CONFIG_FILES([
 	tests/data/pam/ocserv
 	tests/data/pam/nss-passwd
 	tests/data/pam/nss-group
+	tests/data/raddb/radiusd.conf
 	tests/Makefile
 ])
 AC_OUTPUT
+chmod 640 tests/data/raddb/radiusd.conf
 
 AC_MSG_NOTICE([
 Summary of build options:
