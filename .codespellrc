@@ -1,4 +1,4 @@
 [codespell]
-skip = ./.git,*.pem
+skip = ./.git,ccan,pcl,*.pem
 ignore-words-list = alloced,ans,gir,siz,te
 uri-ignore-words-list = gord,ist
