@@ -515,7 +515,7 @@ static json_t *oidc_extract_claims(cjose_jws_t * jws)
 	return token_claims;
 }
 
-static bool oidc_verify_singature(oidc_vctx_st * vctx, cjose_jws_t * jws)
+static bool oidc_verify_signature(oidc_vctx_st * vctx, cjose_jws_t * jws)
 {
 	bool result = false;
 
@@ -616,7 +616,7 @@ static bool oidc_verify_token(oidc_vctx_st * vctx, const char *token,
 		goto cleanup;
 	}
 
-	if (!oidc_verify_singature(vctx, jws)) {
+	if (!oidc_verify_signature(vctx, jws)) {
 		syslog(LOG_NOTICE,
 		       "ocserv-oidc: Token signature validation failed\n");
 		goto cleanup;

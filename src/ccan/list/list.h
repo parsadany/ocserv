@@ -381,7 +381,7 @@ static inline const void *list_tail_(const struct list_head *h, size_t off)
  * @off: offset(relative to @i) at which list node data resides.
  *
  * This is a low-level wrapper to iterate @i over the entire list, used to
- * implement all oher, more high-level, for-each constructs. It's a for loop,
+ * implement all other, more high-level, for-each constructs. It's a for loop,
  * so you can break and continue as normal.
  *
  * WARNING! Being the low-level macro that it is, this wrapper doesn't know
@@ -390,7 +390,7 @@ static inline const void *list_tail_(const struct list_head *h, size_t off)
  * properly filled `struct node_list' which in turn contains pointers to
  * memory chunks and it's turtles all the way down. With all that in mind
  * remember that given the wrong pointer/offset couple this macro will
- * happilly churn all you memory until SEGFAULT stops it, in other words
+ * happily churn all you memory until SEGFAULT stops it, in other words
  * caveat emptor.
  *
  * It is worth mentioning that one of legitimate use-cases for that wrapper

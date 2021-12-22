@@ -70,7 +70,7 @@ remain valid until the `cookie-timeout` value expires.
 Dictionary
 ==========
 
-Ocserv supports the following radious attributes.
+Ocserv supports the following radius attributes.
 
 ```
 #	Standard attributes

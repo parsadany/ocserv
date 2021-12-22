@@ -22,7 +22,7 @@ The main component consists of the process which is tasked to:
  * State is passed between main process and worker via an environment 
    variable.
 
- * Listen for incomping UDP "connections" and forward the packet stream
+ * Listen for incoming UDP "connections" and forward the packet stream
    to the appropriate worker process. - See main.c
 
  * Create and forward to workers with an authenticated user a dedicated

@@ -24,7 +24,7 @@ For as more detailed explanation see the OpenID Connect protocol (<https://openi
 
 ## Deploying OIDC authentication
 
-An administrator wanting to deployg OIDC as an authentication scheme must do the following:
+An administrator wanting to deploy OIDC as an authentication scheme must do the following:
 
 1) Register an application identity with the OIDC provider
 2) Obtain the token endpoint and the OpenID Connect metadata document endpoint for their OIDC provider
