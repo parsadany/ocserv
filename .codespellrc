@@ -1,4 +1,4 @@
 [codespell]
-skip = ./.git,ccan,pcl,*.pem
+skip = ./.git,aclocal.m4,./autom4te.cache,./build-aux,config.log,ccan,pcl,*.pem
 ignore-words-list = alloced,ans,gir,siz,te
 uri-ignore-words-list = gord,ist

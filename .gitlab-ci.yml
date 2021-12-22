@@ -456,3 +456,12 @@ triage:
   - linux
   only:
   - schedules
+
+codespell/Fedora:
+  stage: testing
+  image: $CI_REGISTRY/$BUILD_IMAGES_PROJECT:$FEDORA_BUILD
+  script:
+  - git submodule update --init
+  - autoreconf -fvi
+  - ./configure
+  - make codespell
