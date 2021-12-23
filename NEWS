@@ -824,7 +824,7 @@
 - Added config option "output-buffer" to allow selecting between high throughput 
   or low latency (following similar openconnect change).
 - Enabled config option "mtu".
-- Configuration file parsing was modified to allow detecting mispellings of
+- Configuration file parsing was modified to allow detecting misspellings of
   directives and unknown options.
 
 

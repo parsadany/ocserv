@@ -97,7 +97,7 @@ cothread_ctx *co_get_thread_ctx(void)
 
 #else
 /*
- * On Unix, we use pthread. Slightly more complicated ...
+ * On Unix, we use pthread. Sligthly more complicated ...
  */
 #include <pthread.h>
 
