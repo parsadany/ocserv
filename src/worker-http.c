@@ -66,6 +66,7 @@ static const struct known_urls_st known_urls[] = {
 	LL("/1/Linux", get_empty_handler, NULL),
 	LL("/1/Linux_64", get_empty_handler, NULL),
 	LL("/1/Windows", get_empty_handler, NULL),
+	LL("/1/Windows_ARM64", get_empty_handler, NULL),
 	LL("/1/Darwin_i386", get_empty_handler, NULL),
 	LL("/1/binaries/vpndownloader.sh", get_dl_handler, NULL),
 	LL("/1/VPNManifest.xml", get_string_handler, NULL),
