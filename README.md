@@ -1,6 +1,6 @@
 # About
 
-The Openconnect VPN server (ocserv) is an open source Linux SSL
+The OpenConnect VPN server (ocserv) is an open source Linux SSL
 VPN server designed for organizations that require a remote access
 VPN with enterprise user management and control. It follows
 the [openconnect protocol](https://gitlab.com/openconnect/protocol)

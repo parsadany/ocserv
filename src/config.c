@@ -1582,8 +1582,8 @@ void usage(void)
     fprintf(stderr, "               - use for debugging purposes only\n");
 	fprintf(stderr, "   -h, --help                 display extended usage information and exit\n\n");
 
-	fprintf(stderr, "Openconnect VPN server (ocserv) is a VPN server compatible with the\n");
-	fprintf(stderr, "openconnect VPN client.  It follows the TLS and DTLS-based AnyConnect VPN\n");
+	fprintf(stderr, "OpenConnect VPN server (ocserv) is a VPN server compatible with the\n");
+	fprintf(stderr, "OpenConnect VPN client.  It follows the TLS and DTLS-based AnyConnect VPN\n");
 	fprintf(stderr, "protocol which is used by several CISCO routers.\n\n");
 
 	fprintf(stderr, "Please send bug reports to:  "PACKAGE_BUGREPORT"\n");

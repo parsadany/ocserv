@@ -3,8 +3,8 @@
 ## SYNOPSIS
 **ocserv** [options] -c [config]
 
-Openconnect VPN server (ocserv) is a VPN server compatible with the
-openconnect VPN client. It follows the AnyConnect VPN protocol which 
+OpenConnect VPN server (ocserv) is a VPN server compatible with the
+OpenConnect VPN client. It follows the AnyConnect VPN protocol which 
 is used by several CISCO routers.
 
 
