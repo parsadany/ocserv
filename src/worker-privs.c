@@ -147,6 +147,9 @@ int disable_system_calls(struct worker_st *ws)
 	ADD_SYSCALL(send, 0);
 	ADD_SYSCALL(recv, 0);
 
+	/* Required by new versions of glibc */
+	ADD_SYSCALL(futex, 0);
+
 	/* it seems we need to add sendto and recvfrom
 	 * since send() and recv() aren't called by libc.
 	 */

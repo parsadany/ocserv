@@ -34,7 +34,7 @@ int der_decode(const uint8_t *der, unsigned der_size, uint8_t *out, unsigned *ou
 	       char *realm, unsigned realm_size, int *error)
 {
 	int ret, len;
-	ASN1_TYPE c2 = ASN1_TYPE_EMPTY;
+	ASN1_TYPE c2 = NULL;
 
 	ret = asn1_create_element(_kkdcp_pkix1_asn, "KKDCP.KDC-PROXY-MESSAGE", &c2);
 	if (ret != ASN1_SUCCESS) {
@@ -75,7 +75,7 @@ int der_decode(const uint8_t *der, unsigned der_size, uint8_t *out, unsigned *ou
 int der_encode_inplace(uint8_t *raw, unsigned *raw_size, unsigned max_size, int *error)
 {
 	int ret, len;
-	ASN1_TYPE c2 = ASN1_TYPE_EMPTY;
+	ASN1_TYPE c2 = NULL;
 
 	ret = asn1_create_element(_kkdcp_pkix1_asn, "KKDCP.KDC-PROXY-MESSAGE", &c2);
 	if (ret != ASN1_SUCCESS) {

@@ -1,5 +1,7 @@
 * Version 1.1.6 (unreleased)
 - Fixed compatibility with clients on Windows ARM64
+- Added futex() to the accepted list of seccomp. It is required
+  by Fedora 36's libc.
 
 
 * Version 1.1.5 (released 2021-11-17)
