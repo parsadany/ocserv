@@ -834,7 +834,10 @@ static int load_keys(sec_mod_st *sec, unsigned force)
 				    gnutls_privkey_import_x509_raw(p, &data,
 								   GNUTLS_X509_FMT_PEM,
 								   NULL, 0);
-				if (ret == GNUTLS_E_DECRYPTION_FAILED && vhost->pins.pin[0]) {
+				/* GnuTLS 3.7.3 introduces a backwards incompatible change and
+				 * GNUTLS_E_PKCS11_PIN_ERROR is returned when an encrypted
+				 * file is loaded https://gitlab.com/gnutls/gnutls/-/issues/1321 */
+				if ((ret == GNUTLS_E_DECRYPTION_FAILED || ret == GNUTLS_E_PKCS11_PIN_ERROR) && vhost->pins.pin[0]) {
 					ret =
 					    gnutls_privkey_import_x509_raw(p, &data,
 									   GNUTLS_X509_FMT_PEM,
