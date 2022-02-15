@@ -1709,6 +1709,7 @@ char *replace_vals(worker_st *ws, const char *txt)
 	int ret;
 	str_rep_tab tab[3];
 
+	STR_TAB_INIT(tab, sizeof(tab));
 	STR_TAB_SET(0, "%{U}", ws->username);
 	STR_TAB_SET(1, "%{G}", ws->groupname);
 	STR_TAB_TERM(2);

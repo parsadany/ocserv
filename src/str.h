@@ -26,6 +26,7 @@
 #include <config.h>
 #include <stdint.h>
 
+#define STR_TAB_INIT(t, s_t) memset(t, 0, s_t)
 #define STR_TAB_SET(i,pat,val) { \
 	tab[i].pattern = pat; \
 	tab[i].pattern_length = sizeof(pat)-1; \
