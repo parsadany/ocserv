@@ -712,6 +712,12 @@ int sfd = -1;
 			      human_addr((struct sockaddr*)&cli_addr, cli_addr_size, tbuf, sizeof(tbuf)));
 			goto fail;
 		}
+
+		if (session_id_size <= 0 || session_id_size > GNUTLS_MAX_SESSION_ID) {
+			mslog(s, NULL, LOG_INFO, "%s: invalid session ID size",
+			      human_addr((struct sockaddr*)&cli_addr, cli_addr_size, tbuf, sizeof(tbuf)));
+			goto fail;
+		}
 	}
 
 	/* search for the IP and the session ID in all procs */
