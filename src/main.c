@@ -1079,6 +1079,7 @@ static void listen_watcher_cb (EV_P_ ev_io *w, int revents)
 		pid = fork();
 		if (pid == 0) {	/* child */
 			unsigned int sec_mod_instance_index;
+			char buf[MAX_IP_STR]; // buffer holding human readable sockaddr
 			/* close any open descriptors, and erase
 			 * sensitive data before running the worker
 			 */
@@ -1096,9 +1097,10 @@ static void listen_watcher_cb (EV_P_ ev_io *w, int revents)
 
 			set_self_oom_score_adj(s);
 
-			sec_mod_instance_index = hash_any(
-				SA_IN_P_GENERIC(&ws->remote_addr, ws->remote_addr_len),
-				SA_IN_SIZE(ws->remote_addr_len), 0) % s->sec_mod_instance_count;
+			sec_mod_instance_index = hash_any(&ws->remote_addr, ws->remote_addr_len, 0) % s->sec_mod_instance_count;
+			mslog(s, NULL, LOG_DEBUG, "map worker serving remote address %s to secmod instance %u",
+				human_addr((struct sockaddr*)&ws->remote_addr, ws->remote_addr_len, buf, sizeof(buf)),
+				sec_mod_instance_index);
 
 			/* write sec-mod's address */
 			memcpy(&ws->secmod_addr, &s->sec_mod_instances[sec_mod_instance_index].secmod_addr, s->sec_mod_instances[sec_mod_instance_index].secmod_addr_len);
