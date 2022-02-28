@@ -389,7 +389,7 @@ static bool oidc_fetch_oidc_keys(oidc_vctx_st * vctx)
 	}
 
 	if (jwks) {
-		json_decref(oidc_config);
+		json_decref(jwks);
 	}
 	return result;
 }
