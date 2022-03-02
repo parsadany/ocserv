@@ -596,6 +596,10 @@ static bool oidc_verify_signature(oidc_vctx_st * vctx, cjose_jws_t * jws)
 	result = true;
 
  cleanup:
+	if (jwk) {
+		cjose_jwk_release(jwk);
+	}
+
 	return result;
 }
 
