@@ -883,7 +883,9 @@ int add_owasp_headers(worker_st * ws)
 		cstp_puts(ws, "Cross-Origin-Embedder-Policy: require-corp\r\n") < 0 ||
 		cstp_puts(ws, "Cross-Origin-Opener-Policy: same-origin\r\n") < 0 ||
 		cstp_puts(ws, "Cross-Origin-Resource-Policy: same-origin\r\n") < 0 ||
-		cstp_puts(ws, "X-XSS-Protection: 0\r\n") < 0)
+		cstp_puts(ws, "X-XSS-Protection: 0\r\n") < 0 ||
+		cstp_puts(ws, "Pragma: no-cache\r\n") < 0 ||
+		cstp_puts(ws, "Cache-control: no-store\r\n") < 0))
 	{
 		return -1;
 	}
