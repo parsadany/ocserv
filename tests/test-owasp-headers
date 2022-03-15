@@ -47,6 +47,8 @@ function CheckHeaders
     [[ "$1" =~ .*"Cross-Origin-Opener-Policy".* ]] || fail $PID "Missing HTTP header (Cross-Origin-Opener-Policy)"
     [[ "$1" =~ .*"Cross-Origin-Resource-Policy".* ]] || fail $PID "Missing HTTP header (Cross-Origin-Resource-Policy)"
     [[ "$1" =~ .*"X-XSS-Protection".* ]] || fail $PID "Missing HTTP header (X-XSS-Protection)"
+    [[ "$1" =~ .*"Pragma".* ]] || fail $PID "Missing HTTP header (Pragma)"
+    [[ "$1" =~ .*"Cache-control".* ]] || fail $PID "Missing HTTP header (Cache-control)"
 
 	while IFS=':' read name value; do
         case "$name" in
@@ -72,6 +74,10 @@ function CheckHeaders
             [[ "$value" =~ "same-origin" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;
         X-XSS-Protection)
             [[ "$value" =~ "0" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;
+        Pragma)
+            [[ "$value" =~ "no-cache" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;
+        Cache-control)
+            [[ "$value" =~ "no-store" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;    
         esac
 	done < <(echo "$1")
 }
