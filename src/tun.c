@@ -527,7 +527,7 @@ static int os_open_tun(main_server_st * s, struct proc_st *proc)
 		/* try iterating */
 		e = errno;
 		mslog(s, NULL, LOG_DEBUG, "cannot open /dev/tun; falling back to iteration: %s", strerror(e));
-		for (unit_nr = 0; unit_nr < 255; unit_nr++) {
+		for (unit_nr = 0; GETCONFIG(s)->max_clients > 0 ? GETCONFIG(s)->max_clients : 8192; unit_nr++) {
 			snprintf(proc->tun_lease.name, sizeof(proc->tun_lease.name), "/dev/tun%d", unit_nr);
 			fd = open(proc->tun_lease.name, O_RDWR);
 #ifdef SIOCIFCREATE
