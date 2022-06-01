@@ -135,3 +135,11 @@ container registry. The compilation/test phase is on every commit to project.
 
 Please see the [technical description page](http://ocserv.gitlab.io/www/technical.html).
 
+# License
+
+The license of ocserv is GPLv2+. See COPYING for the license terms.
+
+Some individual code may be covered under other (compatible with
+GPLv2) licenses. For the CCAN components see src/ccan/licenses/
+In gnulib (see gl/) only LGPLv2 components are used, and inih
+library is under the simplified BSD license (src/inih/LICENSE.txt).
