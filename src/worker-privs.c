@@ -127,6 +127,8 @@ int disable_system_calls(struct worker_st *ws)
 	ADD_SYSCALL(nanosleep, 0);
 	ADD_SYSCALL(getrusage, 0);
 	ADD_SYSCALL(alarm, 0);
+	/* musl libc doesn't call alarm but setitimer */
+	ADD_SYSCALL(setitimer, 0);
 	ADD_SYSCALL(getpid, 0);
 
 	/* memory allocation - both are used by different platforms */
