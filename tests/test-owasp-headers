@@ -29,6 +29,22 @@ eval "${GETPORT}"
 echo "Testing ocserv owasp headers... "
 
 update_config test-user-cert.config
+
+# Add HTTP headers to the config file
+echo "included-http-headers = Strict-Transport-Security: max-age=31536000 ; includeSubDomains" >> ${CONFIG}
+echo "included-http-headers = X-Frame-Options: deny" >> ${CONFIG}
+echo "included-http-headers = X-Content-Type-Options: nosniff" >> ${CONFIG}
+echo "included-http-headers = Content-Security-Policy: default-src \'none\'" >> ${CONFIG}
+echo "included-http-headers = X-Permitted-Cross-Domain-Policies: none" >> ${CONFIG}
+echo "included-http-headers = Referrer-Policy: no-referrer" >> ${CONFIG}
+echo "included-http-headers = Clear-Site-Data: \"cache\",\"cookies\",\"storage\"" >> ${CONFIG}
+echo "included-http-headers = Cross-Origin-Embedder-Policy: require-corp" >> ${CONFIG}
+echo "included-http-headers = Cross-Origin-Opener-Policy: same-origin" >> ${CONFIG}
+echo "included-http-headers = Cross-Origin-Resource-Policy: same-origin" >> ${CONFIG}
+echo "included-http-headers = X-XSS-Protection: 0" >> ${CONFIG}
+echo "included-http-headers = Pragma: no-cache" >> ${CONFIG}
+echo "included-http-headers = Cache-control: no-cache, no-store" >> ${CONFIG}
+
 launch_simple_sr_server -d 1 -f -c ${CONFIG}
 PID=$!
 
@@ -49,7 +65,7 @@ function CheckHeaders
     [[ "$1" =~ .*"X-XSS-Protection".* ]] || fail $PID "Missing HTTP header (X-XSS-Protection)"
     [[ "$1" =~ .*"Pragma".* ]] || fail $PID "Missing HTTP header (Pragma)"
     [[ "$1" =~ .*"Cache-control".* ]] || fail $PID "Missing HTTP header (Cache-control)"
-
+    
 	while IFS=':' read name value; do
         case "$name" in
         Strict-Transport-Security)
@@ -77,7 +93,7 @@ function CheckHeaders
         Pragma)
             [[ "$value" =~ "no-cache" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;
         Cache-control)
-            [[ "$value" =~ "no-store" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;    
+            [[ "$value" =~ "no-cache, no-store" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;
         esac
 	done < <(echo "$1")
 }
