@@ -873,21 +873,15 @@ void http_req_deinit(worker_st * ws)
  */
 int add_owasp_headers(worker_st * ws)
 {
-	if (cstp_puts(ws, "Strict-Transport-Security: max-age=31536000 ; includeSubDomains\r\n") < 0 || // Use only HTTPS
-		cstp_puts(ws, "X-Frame-Options: deny\r\n") < 0 || // Do not display page in a frame
-		cstp_puts(ws, "X-Content-Type-Options: nosniff\r\n") < 0 || // Advertised MIME types should be followed
-		cstp_puts(ws, "Content-Security-Policy: default-src \'none\'\r\n") < 0 ||
-		cstp_puts(ws, "X-Permitted-Cross-Domain-Policies: none\r\n") < 0 || 
-		cstp_puts(ws, "Referrer-Policy: no-referrer\r\n") < 0 || // No referrer information is included
-		cstp_puts(ws, "Clear-Site-Data: \"cache\",\"cookies\",\"storage\"\r\n") < 0 || // Clear browsing data (cache, cookies, storage)
-		cstp_puts(ws, "Cross-Origin-Embedder-Policy: require-corp\r\n") < 0 || // Use CORS header to load cross-origin resource
-		cstp_puts(ws, "Cross-Origin-Opener-Policy: same-origin\r\n") < 0 || // Do not load cross-origin documents in same browser context
-		cstp_puts(ws, "Cross-Origin-Resource-Policy: same-origin\r\n") < 0 || // Block no-cors cross-origin/cross-site requests
-		cstp_puts(ws, "X-XSS-Protection: 0\r\n") < 0 || // Disable XSS filtering
-		cstp_puts(ws, "Pragma: no-cache\r\n") < 0 || // For backwards compatibility when Cache-control is not recognized
-		cstp_puts(ws, "Cache-control: no-store\r\n") < 0) // Do not cache responses
+	unsigned i;
+
+	for(i=0; i < GETCONFIG(ws)->included_http_headers_size; i++)
 	{
-		return -1;
+		if (cstp_printf(ws, "%s", GETCONFIG(ws)->included_http_headers[i]) < 0 ||
+		    cstp_puts(ws, "\r\n") < 0)
+		{
+			return -1;
+		}
 	}
 	return 0;
 }

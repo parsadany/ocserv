@@ -1078,6 +1078,12 @@ static int cfg_ini_handler(void *_ctx, const char *section, const char *name, co
 		READ_MULTI_LINE(config->custom_header, config->custom_header_size);
 	} else if (strcmp(name, "split-dns") == 0) {
 		READ_MULTI_LINE(config->split_dns, config->split_dns_size);
+	}  else if (strcmp(name, "included-http-headers") == 0) {
+		// Don't use sanitized input since http header values can contain optional trailing blanks and double quotes
+		if (_add_multi_line_val(pool, &(config->included_http_headers), &(config->included_http_headers_size), _value) < 0) {
+			fprintf(stderr, ERRSTR"memory\n");
+			exit(1);
+		}
 	} else if (strcmp(name, "route") == 0) {
 		READ_MULTI_LINE(config->network.routes, config->network.routes_size);
 	} else if (strcmp(name, "no-route") == 0) {
