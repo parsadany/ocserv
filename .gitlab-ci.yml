@@ -63,7 +63,7 @@ i386/Debian:
       - ./*.log
       - ./tests/*.log
 
-Ubuntu16.04:
+Ubuntu20.04:
   stage: testing
   image: $CI_REGISTRY/$BUILD_IMAGES_PROJECT:$UBUNTU16_BUILD
   script:
@@ -71,8 +71,6 @@ Ubuntu16.04:
   - autoreconf -fvi
   - ./configure --without-nuttcp-tests
   - make -j$JOBS
-# this version of openconnect doesn't work with IPv6 only
-  - make check -j$JOBS XFAIL_TESTS="ipv6-iface ipv6-small-net"
   tags:
   - shared
   - linux
@@ -86,7 +84,7 @@ Ubuntu16.04:
       - ./*.log
       - ./tests/*.log
 
-Ubuntu20.04:
+Ubuntu22.04:
   stage: testing
   image: $CI_REGISTRY/$BUILD_IMAGES_PROJECT:$UBUNTU20_BUILD
   script:
