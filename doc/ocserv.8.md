@@ -189,8 +189,9 @@ AES).
 
     $ certtool --generate-privkey --outfile user-key.pem
     $ cat << _EOF_ >user.tmpl
-    cn = "user"
-    unit = "admins"
+    dn = "cn=Full Name,O=Example Org,UID=username"
+    #if usernames are SAN(rfc822name) email addresses
+    #email = "username@example.com"
     expiration_days = 365
     signing_key
     tls_www_client
