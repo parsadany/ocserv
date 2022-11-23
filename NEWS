@@ -1,3 +1,7 @@
+* Version 1.1.7 (unreleased)
+- Enhanced the seccomp filters for ARMv7 compatibility and musl libc
+
+
 * Version 1.1.6 (released 2022-02-17)
 - Fixed compatibility with clients on Windows ARM64
 - Added futex() to the accepted list of seccomp. It is required
