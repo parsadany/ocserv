@@ -73,7 +73,7 @@
 # include <libtasn1.h>
 
 extern const ASN1_ARRAY_TYPE kkdcp_asn1_tab[];
-ASN1_TYPE _kkdcp_pkix1_asn = NULL;
+asn1_node _kkdcp_pkix1_asn = NULL;
 #endif
 
 extern struct snapshot_t * config_snapshot;
