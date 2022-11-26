@@ -216,6 +216,7 @@ Fedora:
   - make check -j$JOBS COVERAGE=1 VERBOSE=1
   - make dist
   - make local-code-coverage-output
+  coverage: '/coverage lines: \d+\.\d+/'
   tags:
   - shared
   - linux
