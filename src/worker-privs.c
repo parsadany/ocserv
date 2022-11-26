@@ -73,7 +73,6 @@ int set_sigsys_handler(struct worker_st *ws)
 #endif
 
 
-
 int disable_system_calls(struct worker_st *ws)
 {
 	int ret;
@@ -122,8 +121,14 @@ int disable_system_calls(struct worker_st *ws)
 	ADD_SYSCALL(gettimeofday, 0);
 #if defined(HAVE_CLOCK_GETTIME)
 	ADD_SYSCALL(clock_gettime, 0);
+#if defined(SYS_clock_gettime64) || defined(__NR_clock_gettime64)
+	ADD_SYSCALL(clock_gettime64, 0);
+#endif
 #endif
 	ADD_SYSCALL(clock_nanosleep, 0);
+#if defined(SYS_clock_nanosleep64) || defined(__NR_clock_nanosleep64)
+	ADD_SYSCALL(clock_nanosleep64, 0);
+#endif
 	ADD_SYSCALL(nanosleep, 0);
 	ADD_SYSCALL(getrusage, 0);
 	ADD_SYSCALL(alarm, 0);
@@ -135,7 +140,7 @@ int disable_system_calls(struct worker_st *ws)
 	ADD_SYSCALL(brk, 0);
 	ADD_SYSCALL(mmap, 0);
 
-#ifdef __NR_getrandom
+#if defined(SYS_getrandom) || defined(__NR_getrandom)
 	ADD_SYSCALL(getrandom, 0); /* used by gnutls 3.5.x */
 #endif
 	ADD_SYSCALL(recvmsg, 0);
@@ -171,6 +176,9 @@ int disable_system_calls(struct worker_st *ws)
 
 	/* allow setting non-blocking sockets */
 	ADD_SYSCALL(fcntl, 0);
+#if defined(SYS_fcntl64) || defined(__NR_fcntl64)
+	ADD_SYSCALL(fcntl64, 0);
+#endif
 	ADD_SYSCALL(close, 0);
 	ADD_SYSCALL(exit, 0);
 	ADD_SYSCALL(exit_group, 0);
@@ -180,6 +188,9 @@ int disable_system_calls(struct worker_st *ws)
 	ADD_SYSCALL(openat, 0);
 	ADD_SYSCALL(fstat, 0);
 	ADD_SYSCALL(stat, 0);
+#if defined(SYS_fstat64) || defined(__NR_fstat64)
+	ADD_SYSCALL(fstat64, 0);
+#endif
 	ADD_SYSCALL(stat64, 0);
 	ADD_SYSCALL(newfstatat, 0);
 	ADD_SYSCALL(lseek, 0);
