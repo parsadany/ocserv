@@ -11,7 +11,7 @@ ACLOCAL_AMFLAGS = -I m4 -I gl/m4
 @CODE_COVERAGE_RULES@
 
 local-code-coverage-output: code-coverage-capture
-	cat $(CODE_COVERAGE_OUTPUT_DIRECTORY)/index.html|grep headerCovTableEntryLo|head -1|sed 's/^.*>\([0-9]\+\.[0-9]\+\s*%\)<.*$$/ coverage lines: \1/'
+	cat $(CODE_COVERAGE_OUTPUT_DIRECTORY)/index.html|grep headerCovTableEntry|grep "%"|head -1|sed 's/^.*>\([0-9\.\ %]*\)<.*$$/coverage lines: \1/'
 
 gl:
 	gnulib-tool --add-import --lgpl=2
