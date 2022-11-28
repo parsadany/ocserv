@@ -385,5 +385,5 @@ message secm_list_cookies_reply_msg
 /* snapshot_state */
 message snapshot_state_msg
 {
-	
+
 }

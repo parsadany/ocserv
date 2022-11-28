@@ -73,4 +73,3 @@ This program is released under the terms of the GNU General Public License, vers
 ## AUTHORS
 Written by Nikos Mavrogiannopoulos. Many people have
 contributed to it.
-

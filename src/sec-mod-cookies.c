@@ -31,7 +31,7 @@ static void send_empty_reply(void *pool, int fd, sec_mod_st *sec)
 {
 	SecmListCookiesReplyMsg msg = SECM_LIST_COOKIES_REPLY_MSG__INIT;
 	int ret;
-	
+
 	ret = send_msg(pool, fd, CMD_SECM_LIST_COOKIES_REPLY, &msg,
 		(pack_size_func) secm_list_cookies_reply_msg__get_packed_size,
 		(pack_func) secm_list_cookies_reply_msg__pack);
@@ -119,4 +119,3 @@ void handle_secm_list_cookies_reply(void *pool, int fd, sec_mod_st *sec)
 	talloc_free(msg.cookies);
 	talloc_free(cookies);
 }
-

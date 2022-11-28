@@ -1148,8 +1148,8 @@ static void replace_file_with_snapshot(char ** file_name)
 	}
 
 	if (snapshot_lookup_filename(
-			config_snapshot, 
-			*file_name, 
+			config_snapshot,
+			*file_name,
 			&snapshot_file_name) < 0) {
 		fprintf(stderr, ERRSTR"cannot find snapshot for file %s\n", *file_name);
 		exit(1);
@@ -1184,7 +1184,7 @@ static void parse_cfg_file(void *pool, const char *file, struct list_head *head,
 	if ((flags & CFG_FLAG_WORKER) == CFG_FLAG_WORKER) {
 		char * snapshot_file = NULL;
 
-		if ((snapshot_lookup_filename(config_snapshot, file, &snapshot_file) < 0) && 
+		if ((snapshot_lookup_filename(config_snapshot, file, &snapshot_file) < 0) &&
 			(snapshot_lookup_filename(config_snapshot, OLD_DEFAULT_CFG_FILE, &snapshot_file) < 0)) {
 			fprintf(stderr, ERRSTR"snapshot_lookup failed for file %s\n", file);
 			exit(1);
@@ -1226,7 +1226,7 @@ static void parse_cfg_file(void *pool, const char *file, struct list_head *head,
 			CONFIG_ERROR(local_cfg_file, ret);
 			exit(1);
 		}
-		
+
 		ret = snapshot_create(config_snapshot, local_cfg_file);
 		if (ret < 0){
 			fprintf(stderr, ERRSTR"cannot snapshot config file %s\n", local_cfg_file);
@@ -1868,16 +1868,16 @@ void clear_old_configs(struct list_head *head)
 }
 
 // ocserv and ocserv-worker both load and parse the configuration files.
-// As part of the process of loading the config files, auth / acct methods 
+// As part of the process of loading the config files, auth / acct methods
 // are enabled based on the content of the acct_mod_st and auth_mod_st tables.
 // These auth tables are present in the auth sub-subsystem. Linking against
 // the auth subsystem pulls in a very large set of dependent binaries which
-// increases the overall memory footprint. To avoid this, we provide stub 
+// increases the overall memory footprint. To avoid this, we provide stub
 // versions of acct_mod_st and auth_mod_st tables that the ocserv-worker
 // process can link against.
 #if defined(OCSERV_WORKER_PROCESS)
 
-// Group information is populated by the auth subsystem. 
+// Group information is populated by the auth subsystem.
 // When compiles as part of ocserv-worker, the auth subsystem is not present.
 // To work around this, the group information is passed from ocserv-main to
 // ocserv-worker, which then caches it and returns it when queried.

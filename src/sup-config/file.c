@@ -254,7 +254,7 @@ int parse_group_cfg_file(struct cfg_st *global_config,
 
 	ret = 0;
  fail:
-	
+
 	return ret;
 }
 

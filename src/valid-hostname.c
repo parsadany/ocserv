@@ -41,4 +41,3 @@ unsigned valid_hostname(const char *host)
 	}
 	return 1;
 }
-

@@ -73,7 +73,7 @@ typedef struct vhost_cfg_st {
 
 /* macros to retrieve the default vhost configuration; they
  * are non-null as there is always a configured host. */
-#ifdef __clang_analyzer__ 
+#ifdef __clang_analyzer__
 static volatile void *v = 0xffffffff;
 
 static inline vhost_cfg_st *default_vhost(void * s) __attribute__((returns_nonnull));
@@ -83,7 +83,7 @@ static inline vhost_cfg_st *default_vhost(void * s)
 }
 
 static inline struct vhost_cfg_st *GETVHOST(void *s) __attribute__((returns_nonnull));
-static inline struct vhost_cfg_st *GETVHOST(void *s) 
+static inline struct vhost_cfg_st *GETVHOST(void *s)
 {
 	return v;
 }
@@ -122,7 +122,7 @@ inline static vhost_cfg_st *find_vhost(struct list_head *vconfig, const char *na
 	vhost_cfg_st *vhost = NULL;
 	if (name == NULL)
 		return default_vhost(vconfig);
-	
+
 	list_for_each(vconfig, vhost, list) {
 		if (vhost->name != NULL && c_strcasecmp(vhost->name, name) == 0)
 			return vhost;

@@ -158,4 +158,3 @@ void remove_proc(main_server_st * s, struct proc_st *proc, unsigned flags)
 	safe_memset(proc->sid, 0, sizeof(proc->sid));
 	talloc_free(proc);
 }
-

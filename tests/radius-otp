@@ -34,7 +34,7 @@ RADIUSD=$(which radiusd)
 
 if test -z "${RADIUSD}";then
 	RADIUSD=$(which freeradius)
-fi 
+fi
 
 . `dirname $0`/common.sh
 

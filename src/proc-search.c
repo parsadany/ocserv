@@ -317,4 +317,3 @@ struct proc_st *proc_search_sid(struct main_server_st *s,
 
 	return htable_get(s->proc_table.db_sid, hash_any(sid, SID_SIZE, 0), sid_cmp, &fsid);
 }
-

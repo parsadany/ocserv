@@ -54,5 +54,5 @@ void generate_hmac(size_t key_length, const uint8_t * key, size_t component_coun
 
 	hmac_sha256_digest(&ctx, HMAC_DIGEST_SIZE, digest);
 
-	safe_memset(&ctx, 0, sizeof(ctx));	
+	safe_memset(&ctx, 0, sizeof(ctx));
 }

@@ -108,11 +108,11 @@ int str_append_data(str_st * dest, const void *data, size_t data_size)
 	ret = str_append_size(dest, data_size+1);
 	if (ret < 0)
 		return ret;
-	
+
 	memcpy(&dest->data[dest->length], data, data_size);
 	dest->length = data_size + dest->length;
 	dest->data[dest->length] = 0;
-	
+
 	return 0;
 }
 
@@ -231,4 +231,3 @@ int str_replace_str(str_st *str, const str_rep_tab *tab)
 
 	return 0;
 }
-

@@ -288,7 +288,7 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM([
 		   AC_DEFINE([HAVE_PAM], 1, [Enable the PAM library])],
 		  [AC_MSG_RESULT(no)
    	           AC_MSG_WARN([[
-*** 
+***
 *** libpam was not found. PAM support will be disabled.
 *** ]])])
 LIBS="$oldlibs"
@@ -332,7 +332,7 @@ if test "$test_for_radius" = yes;then
 		   AC_DEFINE([LEGACY_RADIUS], 1, [Enable the legacy library support])],
 		  [AC_MSG_RESULT(no)
    	           AC_MSG_WARN([[
-*** 
+***
 *** radcli 1.2.1 or later was not found. Radius support will be disabled.
 *** See http://radcli.github.io/radcli/
 *** ]])])
@@ -479,7 +479,7 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM([
 		   with_local_http_parser=no],
 		  [AC_MSG_RESULT(no)
   	           AC_MSG_WARN([[
-*** 
+***
 *** libhttp-parser not found.
 *** An included version of the library will be used.
 *** ]])])
@@ -609,7 +609,7 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM([
 		   with_local_pcl=no],
 		  [AC_MSG_RESULT(no)
   	           AC_MSG_WARN([[
-*** 
+***
 *** libpcl (portable co-routines) was not found.
 *** An included version of the library will be used.
 *** ]])])
@@ -708,7 +708,7 @@ Summary of build options:
   CWrap testing:        ${have_cwrap}
   CWrap PAM testing:    ${have_cwrap_pam}
   CWrap NSS testing:    ${have_cwrap_nss}
-  
+
   PAM auth backend:     ${pam_enabled}
   Radius auth backend:  ${radius_enabled}
   GSSAPI auth backend:  ${enable_gssapi}
@@ -750,5 +750,3 @@ if test "x${isolation}" = xnone;then
 *** will not be isolated. Only seccomp is supported (see src/worker-privs.c)
 *** ]])
 fi
-
-

@@ -1652,7 +1652,7 @@ static int tun_mainloop(struct worker_st *ws, struct timespec *tnow)
 			cstp_type = AC_PKT_COMPRESSED;
 		}
 	}
-#endif 
+#endif
 
 	/* only transmit if allowed */
 	if (bandwidth_update(&ws->b_tx, dtls_to_send.size, tnow)
@@ -2624,9 +2624,9 @@ static int test_for_tcp_health_probe(struct worker_st *ws)
 	ret = recv(ws->conn_fd, buffer, sizeof(buffer), MSG_PEEK);
 
 	// If we get back an error, assume this was a tcp health probe
-	if (ret > 0) 
+	if (ret > 0)
 		return 0;
-	else 
+	else
 		return 1;
 }
 
@@ -2743,7 +2743,7 @@ static void term_sig_watcher_cb(struct ev_loop *loop, ev_signal *w, int revents)
 
 static void invoke_dtls_if_needed(struct dtls_st * dtls)
 {
-	if ((dtls->udp_state > UP_WAIT_FD) && 
+	if ((dtls->udp_state > UP_WAIT_FD) &&
 		(dtls->dtls_session != NULL) &&
 		(gnutls_record_check_pending(dtls->dtls_session))) {
 		ev_invoke(worker_loop, &dtls->io, EV_READ);
@@ -2789,7 +2789,7 @@ static int worker_event_loop(struct worker_st * ws)
 	ocsignal(SIGTERM, SIG_DFL);
 	ocsignal(SIGINT, SIG_DFL);
 	ocsignal(SIGALRM, SIG_DFL);
-	
+
 	ev_init(&alarm_sig_watcher, term_sig_watcher_cb);
 	ev_signal_set (&alarm_sig_watcher, SIGALRM);
 	ev_signal_start (worker_loop, &alarm_sig_watcher);
@@ -2801,7 +2801,7 @@ static int worker_event_loop(struct worker_st * ws)
 	ev_init (&term_sig_watcher, term_sig_watcher_cb);
 	ev_signal_set (&term_sig_watcher, SIGTERM);
 	ev_signal_start (worker_loop, &term_sig_watcher);
-	
+
 	ev_set_userdata (worker_loop, ws);
 	ev_set_syserr_cb(syserr_cb);
 

@@ -169,7 +169,7 @@ static void set_common_socket_options(int fd)
 	set_cloexec_flag (fd, 1);
 }
 
-static 
+static
 int _listen_ports(void *pool, struct perm_cfg_st* config, struct addrinfo *res,
 		struct listen_list_st *list, struct netns_fds *netns)
 {
@@ -253,7 +253,7 @@ int _listen_ports(void *pool, struct perm_cfg_st* config, struct addrinfo *res,
 /* Returns 0 on success or negative value on error.
  */
 static int
-listen_ports(void *pool, struct perm_cfg_st* config, 
+listen_ports(void *pool, struct perm_cfg_st* config,
 		struct listen_list_st *list,
 		struct netns_fds *netns)
 {
@@ -486,7 +486,7 @@ void clear_lists(main_server_st *s)
 		}
 		ev_timer_stop(main_loop, &maintenance_watcher);
 #if defined(CAPTURE_LATENCY_SUPPORT)
-		ev_timer_stop(main_loop, &latency_watcher);		
+		ev_timer_stop(main_loop, &latency_watcher);
 #endif
 		/* free memory and descriptors by the event loop */
 		ev_loop_destroy (main_loop);
@@ -676,7 +676,7 @@ int sfd = -1;
 
 	/* check version */
 	if (s->msg_buffer[0] == 22) {
-		mslog(s, NULL, LOG_DEBUG, "new DTLS session from %s (record v%u.%u, hello v%u.%u)", 
+		mslog(s, NULL, LOG_DEBUG, "new DTLS session from %s (record v%u.%u, hello v%u.%u)",
 			human_addr((struct sockaddr*)&cli_addr, cli_addr_size, tbuf, sizeof(tbuf)),
 			(unsigned int)s->msg_buffer[1], (unsigned int)s->msg_buffer[2],
 			(unsigned int)s->msg_buffer[RECORD_PAYLOAD_POS], (unsigned int)s->msg_buffer[RECORD_PAYLOAD_POS+1]);
@@ -684,7 +684,7 @@ int sfd = -1;
 
 	if (s->msg_buffer[1] != 254 && (s->msg_buffer[1] != 1 && s->msg_buffer[2] != 0) &&
 		s->msg_buffer[RECORD_PAYLOAD_POS] != 254 && (s->msg_buffer[RECORD_PAYLOAD_POS] != 0 && s->msg_buffer[RECORD_PAYLOAD_POS+1] != 0)) {
-		mslog(s, NULL, LOG_INFO, "%s: unknown DTLS record version: %u.%u", 
+		mslog(s, NULL, LOG_INFO, "%s: unknown DTLS record version: %u.%u",
 		      human_addr((struct sockaddr*)&cli_addr, cli_addr_size, tbuf, sizeof(tbuf)),
 		      (unsigned)s->msg_buffer[1], (unsigned)s->msg_buffer[2]);
 		goto fail;
@@ -779,7 +779,7 @@ int sfd = -1;
 
 		ret = send_socket_msg_to_worker(s, proc_to_send, CMD_UDP_FD,
 			sfd,
-			&msg, 
+			&msg,
 			(pack_size_func)udp_fd_msg__get_packed_size,
 			(pack_func)udp_fd_msg__pack);
 		if (ret < 0) {
@@ -902,7 +902,7 @@ static void kill_children_auth_timeout(main_server_st* s)
 	list_for_each_safe(&s->proc_list.head, ctmp, cpos, list) {
 		/* If the worker has not completed it's auth within auth_timeout seconds, kill it */
 		if ((ctmp->status < PS_AUTH_COMPLETED) &&
-		    (ctmp->conn_time < oldest_permitted_session) && 
+		    (ctmp->conn_time < oldest_permitted_session) &&
 			(ctmp->pid != -1)) {
 			remove_proc(s, ctmp, RPROC_KILL);
 		}
@@ -944,7 +944,7 @@ static void term_sig_watcher_cb(struct ev_loop *loop, ev_signal *w, int revents)
 	if (server_drain_ms == 0) {
 		terminate_server(s);
 	}
-	else 
+	else
 	{
 		if (!ev_is_active(&graceful_shutdown_watcher)) {
 			mslog(s, NULL, LOG_INFO, "termination request received; stopping new connections");
@@ -1129,7 +1129,7 @@ static void listen_watcher_cb (EV_P_ ev_io *w, int revents)
 			hmac_components[2].length = sizeof(ws->session_start_time);
 
 			generate_hmac(sizeof(s->hmac_key), s->hmac_key, sizeof(hmac_components) / sizeof(hmac_components[0]), hmac_components, (uint8_t*) ws->sec_auth_init_hmac);
-			
+
 			// Clear the HMAC key
 			safe_memset((uint8_t*)s->hmac_key, 0, sizeof(s->hmac_key));
 
@@ -1169,7 +1169,7 @@ fork_failed:
 			close(cmd_fd[0]);
 		} else { /* parent */
 			/* add_proc */
-			ctmp = new_proc(s, pid, cmd_fd[0], 
+			ctmp = new_proc(s, pid, cmd_fd[0],
 					&ws->remote_addr, ws->remote_addr_len,
 					&ws->our_addr, ws->our_addr_len,
 					ws->sid, sizeof(ws->sid));
@@ -1247,7 +1247,7 @@ static void perform_maintenance(main_server_st *s)
 	mslog(s, NULL, LOG_DEBUG, "performing maintenance");
 	cleanup_banned_entries(s);
 	clear_old_configs(s->vconfig);
-	
+
 	kill_children_auth_timeout(s);
 
 	list_for_each_rev(s->vconfig, vhost, list) {
@@ -1271,12 +1271,12 @@ static void latency_watcher_cb(EV_P_ ev_timer *w, int revents)
 	s->stats.delta_latency_stats.rms_total = 0;
 	s->stats.delta_latency_stats.sample_count = 0;
 	mslog(
-		s, 
-		NULL, 
-		LOG_DEBUG, 
-		"Latency: Median Total %ld RMS Total %ld Sample Count %ld", 
-		s->stats.current_latency_stats.median_total, 
-		s->stats.current_latency_stats.rms_total, 
+		s,
+		NULL,
+		LOG_DEBUG,
+		"Latency: Median Total %ld RMS Total %ld Sample Count %ld",
+		s->stats.current_latency_stats.median_total,
+		s->stats.current_latency_stats.rms_total,
 		s->stats.current_latency_stats.sample_count);
 }
 #endif
@@ -1460,12 +1460,12 @@ int main(int argc, char** argv)
 
 	// Start the configured number of ocserv-sm processes
 	s->sec_mod_instance_count = GETPCONFIG(s)->sec_mod_scale;
-	
+
 	if (s->sec_mod_instance_count == 0)	{
 		if (GETCONFIG(s)->max_clients != 0) {
 			// Compute ideal number of clients per sec-mod
 			unsigned int sec_mod_count_for_users = GETCONFIG(s)->max_clients / MINIMUM_USERS_PER_SEC_MOD + 1;
-			// Limit it to number of processors. 
+			// Limit it to number of processors.
 			s->sec_mod_instance_count = MIN(processor_count,sec_mod_count_for_users);
 		} else {
 			// If it's unlimited, the use processor count.
@@ -1605,7 +1605,7 @@ int main(int argc, char** argv)
 	/* Main server loop */
 	ev_run (main_loop, 0);
 
-	/* try to clean-up everything allocated to ease checks 
+	/* try to clean-up everything allocated to ease checks
 	 * for memory leaks.
 	 */
 	for (i = 0; i < s->sec_mod_instance_count; i ++) {

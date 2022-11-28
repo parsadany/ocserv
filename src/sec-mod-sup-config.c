@@ -46,4 +46,3 @@ void sup_config_init(sec_mod_st *sec)
 		}
 	}
 }
-

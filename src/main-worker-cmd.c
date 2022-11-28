@@ -191,7 +191,7 @@ static int accept_user(main_server_st * s, struct proc_st *proc, unsigned cmd)
 	return ret;
 }
 
-/* Performs the required steps based on the result from the 
+/* Performs the required steps based on the result from the
  * authentication function (e.g. handle_auth_init).
  *
  * @cmd: the command received
@@ -450,7 +450,7 @@ int handle_worker_commands(main_server_st * s, struct proc_st *proc)
 #if defined(CAPTURE_LATENCY_SUPPORT)
 	case CMD_LATENCY_STATS_DELTA:{
 			LatencyStatsDelta * tmsg;
- 
+
 			if (proc->status != PS_AUTH_COMPLETED) {
 				mslog(s, proc, LOG_ERR,
 					"received LATENCY STATS DELTA in unauthenticated state.");
@@ -464,7 +464,7 @@ int handle_worker_commands(main_server_st * s, struct proc_st *proc)
 				ret = ERR_BAD_COMMAND;
 				goto cleanup;
 			}
-			
+
 			s->stats.delta_latency_stats.median_total += tmsg->median_delta;
 			s->stats.delta_latency_stats.rms_total += tmsg->rms_delta;
 			s->stats.delta_latency_stats.sample_count += tmsg->sample_count_delta;
@@ -485,4 +485,3 @@ int handle_worker_commands(main_server_st * s, struct proc_st *proc)
 
 	return ret;
 }
-

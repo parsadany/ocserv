@@ -355,7 +355,7 @@ int if_address_init(main_server_st *s)
 		}
 		count ++;
 	}
-	
+
 	local_if_addresses = talloc_array(s, if_address_st, count);
 	if (local_if_addresses == NULL) {
 		fprintf(stderr, "Failed to allocate");
@@ -406,11 +406,11 @@ static bool test_local_ipv4(struct sockaddr_in * remote, struct sockaddr_in * lo
 static bool test_local_ipv6(struct sockaddr_in6 * remote, struct sockaddr_in6 * local, struct sockaddr_in6 * network)
 {
 	unsigned index = 0;
-	
+
 	for (index = 0; index < 4; index ++) {
 		uint32_t l = local->sin6_addr.s6_addr32[index] & network->sin6_addr.s6_addr32[index];
 		uint32_t r = remote->sin6_addr.s6_addr32[index] & network->sin6_addr.s6_addr32[index];
-		if (l != r) 
+		if (l != r)
 			return false;
 	}
 	return true;

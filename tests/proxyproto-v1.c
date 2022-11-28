@@ -51,7 +51,7 @@ static unsigned try(const char *src, unsigned src_port, const char *dst, unsigne
 	} else {
 		snprintf(str, sizeof(str), "TCP4 %s %s %u %u\r\n", src, dst, src_port, dst_port);
 	}
-	
+
 	ret = parse_proxy_proto_header_v1(&ws, str);
 	if (ret < 0) {
 		fprintf(stderr, "error parsing: '%s': %d\n", str, ret);
@@ -62,7 +62,7 @@ static unsigned try(const char *src, unsigned src_port, const char *dst, unsigne
 	if (ipv6) {
 		struct sockaddr_in6 *sa_src = (void*)&ws.remote_addr;
 		struct sockaddr_in6 *sa_dst = (void*)&ws.our_addr;
-	
+
 		if (ws.remote_addr_len != sizeof(struct sockaddr_in6) ||
 			ws.our_addr_len != sizeof(struct sockaddr_in6)) {
 			fprintf(stderr, "error in %d for %s\n", __LINE__, str);

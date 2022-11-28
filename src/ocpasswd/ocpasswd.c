@@ -121,7 +121,7 @@ crypt_int(const char *fpasswd, const char *username, const char *groupname,
 
 	fd = fopen(fpasswd, "r");
 	if (fd == NULL) {
-		fprintf(fd2, "%s:%s:%s\n", username, groupname, cr_passwd); 
+		fprintf(fd2, "%s:%s:%s\n", username, groupname, cr_passwd);
 	} else {
 		int found = 0;
 		while ((len = getline(&line, &line_size, fd)) > 0) {
@@ -538,4 +538,3 @@ int main(int argc, char **argv)
 	gnutls_global_deinit();
 	return 0;
 }
-

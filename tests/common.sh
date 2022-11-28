@@ -269,4 +269,4 @@ GETPORT='
     done
 '
 
-trap "fail \"Failed to launch the server, aborting test... \"" 10 
+trap "fail \"Failed to launch the server, aborting test... \"" 10
