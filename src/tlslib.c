@@ -51,7 +51,9 @@
 #include <netinet/tcp.h>
 #include <c-ctype.h>
 
+#ifndef UNDER_TEST
 static void tls_reload_ocsp(main_server_st* s, struct vhost_cfg_st *vhost);
+#endif
 
 void cstp_cork(worker_st *ws)
 {
