@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 
 	child = fork();
 	assert(child >= 0);
-	
+
 	if (child) {
 		close(sockets[1]);
 		receiver(sockets[0]);

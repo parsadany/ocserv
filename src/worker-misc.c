@@ -180,7 +180,7 @@ int handle_commands_from_main(struct worker_st *ws)
 }
 
 /* Completes the VPN device information.
- * 
+ *
  * Returns 0 on success.
  */
 int complete_vpn_info(worker_st * ws, struct vpn_st *vinfo)

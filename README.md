@@ -5,7 +5,7 @@ VPN server designed for organizations that require a remote access
 VPN with enterprise user management and control. It follows
 the [openconnect protocol](https://gitlab.com/openconnect/protocol)
 and is the counterpart of the [openconnect VPN client](http://www.infradead.org/openconnect/).
-It is also compatible with CISCO's AnyConnect SSL VPN. 
+It is also compatible with CISCO's AnyConnect SSL VPN.
 
 The program consists of:
  1. ocserv, the main server application

@@ -65,7 +65,7 @@ function CheckHeaders
     [[ "$1" =~ .*"X-XSS-Protection".* ]] || fail $PID "Missing HTTP header (X-XSS-Protection)"
     [[ "$1" =~ .*"Pragma".* ]] || fail $PID "Missing HTTP header (Pragma)"
     [[ "$1" =~ .*"Cache-control".* ]] || fail $PID "Missing HTTP header (Cache-control)"
-    
+
 	while IFS=':' read name value; do
         case "$name" in
         Strict-Transport-Security)
@@ -78,7 +78,7 @@ function CheckHeaders
             [[ "$value" =~ "default-src 'none'" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;
         X-Permitted-Cross-Domain-Policies)
             [[ "$value" =~ "none" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;
-        Referrer-Policy)    
+        Referrer-Policy)
             [[ "$value" =~ "no-referrer" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;
         Clear-Site-Data)
             [[ "$value" =~ "\"cache\",\"cookies\",\"storage\"" ]] || fail $PID "Unexpected HTTP header value ($name: $value)";;

@@ -340,7 +340,7 @@ void *oidc_get_brackets_string(void * pool, struct perm_cfg_st *config, const ch
 	char * additional = NULL;
 
 	unsigned vals_size, i;
-	
+
 	vals_size  = expand_brackets_string(pool, str, vals);
 
 	for (i = 0; i < vals_size; i ++)	{
@@ -348,6 +348,6 @@ void *oidc_get_brackets_string(void * pool, struct perm_cfg_st *config, const ch
 			additional = talloc_strdup(pool, vals[i].value);
 		}
 	}
-	
+
 	return additional;
 }

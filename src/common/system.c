@@ -60,7 +60,7 @@ SIGHANDLER_T ocsignal(int signum, SIGHANDLER_T handler)
 	new_action.sa_handler = handler;
 	sigemptyset (&new_action.sa_mask);
 	new_action.sa_flags = 0;
-	
+
 	sigaction (signum, &new_action, &old_action);
 	return old_action.sa_handler;
 }

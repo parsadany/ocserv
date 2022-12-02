@@ -303,12 +303,12 @@ struct cfg_st {
 	unsigned use_occtl; /* whether support for the occtl tool will be enabled */
 
 	unsigned try_mtu; /* MTU discovery enabled */
-	unsigned cisco_client_compat; /* do not require client certificate, 
+	unsigned cisco_client_compat; /* do not require client certificate,
 	                               * and allow auth to complete in different
 	                               * TCP sessions. */
 	unsigned rate_limit_ms; /* if non zero force a connection every rate_limit milliseconds if ocserv-sm is heavily loaded */
 	unsigned ping_leases; /* non zero if we need to ping prior to leasing */
-	unsigned server_drain_ms; /* how long to wait after we stop accepting new connections before closing old connections */ 
+	unsigned server_drain_ms; /* how long to wait after we stop accepting new connections before closing old connections */
 
 	size_t rx_per_sec;
 	size_t tx_per_sec;
@@ -345,7 +345,7 @@ struct cfg_st {
 
 	bool gssapi_no_local_user_map;
 
-	/* known iroutes - only sent to the users who are not registering them 
+	/* known iroutes - only sent to the users who are not registering them
 	 */
 	char **known_iroutes;
 	size_t known_iroutes_size;

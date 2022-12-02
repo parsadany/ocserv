@@ -1,4 +1,4 @@
-AM_CPPFLAGS = 
+AM_CPPFLAGS =
 
 if LOCAL_TALLOC
 AM_CPPFLAGS += -I$(top_srcdir)/src/ccan/talloc
@@ -6,7 +6,7 @@ endif
 
 if LOCAL_HTTP_PARSER
 AM_CPPFLAGS += -I$(top_srcdir)/src/http-parser/
-NEEDED_HTTP_PARSER_LIBS = 
+NEEDED_HTTP_PARSER_LIBS =
 else
 NEEDED_HTTP_PARSER_LIBS = $(HTTP_PARSER_LIBS)
 endif

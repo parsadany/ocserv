@@ -4,7 +4,7 @@
 tasks from our [planned list](https://gitlab.com/ocserv/ocserv/milestones),
 or surprise us with enhancement we didn't plan for. In all cases be prepared
 to defend and justify your enhancements, and get through few rounds
-of changes. 
+of changes.
 
 We try to stick to the following rules, so when contributing please
 try to follow them too.
@@ -13,11 +13,11 @@ try to follow them too.
 ## Git commits:
 
 Note that when contributing code you will need to assert that the contribution is
-in accordance to the "Developer's Certificate of Origin" as found in the 
+in accordance to the "Developer's Certificate of Origin" as found in the
 file [DCO.txt](doc/DCO.txt).
 
 To indicate that, make sure that your contributions (patches or merge requests),
-contain a "Signed-off-by" line, with your real name and e-mail address. 
+contain a "Signed-off-by" line, with your real name and e-mail address.
 To automate the process use "git am -s" to produce patches and/or set the
 a template to simplify this process, as follows.
 

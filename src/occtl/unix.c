@@ -67,7 +67,7 @@ struct unix_ctx {
 	const char *socket_file;
 };
 
-static uint8_t msg_map[] = {   
+static uint8_t msg_map[] = {
         [CTL_CMD_STATUS] = CTL_CMD_STATUS_REP,
         [CTL_CMD_RELOAD] = CTL_CMD_RELOAD_REP,
         [CTL_CMD_STOP] = CTL_CMD_STOP_REP,
@@ -184,7 +184,7 @@ int connect_to_ocserv (const char *socket_file)
 	ret = connect(sd, (struct sockaddr *)&sa, sizeof(sa));
 	if (ret == -1) {
 		e = errno;
-		fprintf(stderr, "error connecting to ocserv socket '%s': %s\n", 
+		fprintf(stderr, "error connecting to ocserv socket '%s': %s\n",
 			sa.sun_path, strerror(e));
 		ret = -1;
 		goto error;
@@ -267,12 +267,12 @@ int handle_status_cmd(struct unix_ctx *ctx, const char *arg, cmd_params_st *para
 
 			time2human(median_latency, buf, sizeof(buf));
 			print_single_value(stdout, params, "Median latency", buf, 1);
-			if (HAVE_JSON(params)) 
+			if (HAVE_JSON(params))
 				print_single_value_int(stdout, params, "raw_median_latency", median_latency, 1);
 
 			time2human(stdev_latency, buf, sizeof(buf));
 			print_single_value(stdout, params, "STDEV latency", buf, 1);
-			if (HAVE_JSON(params)) 
+			if (HAVE_JSON(params))
 				print_single_value_int(stdout, params, "raw_stdev_latency", stdev_latency, 1);
 
 		}
@@ -358,7 +358,7 @@ int handle_reload_cmd(struct unix_ctx *ctx, const char *arg, cmd_params_st *para
 	BoolMsg *rep;
 	unsigned status;
 	PROTOBUF_ALLOCATOR(pa, ctx);
-	
+
 	init_reply(&raw);
 
 	ret = send_cmd(ctx, CTL_CMD_RELOAD, NULL, NULL, NULL, &raw);
@@ -398,7 +398,7 @@ int handle_stop_cmd(struct unix_ctx *ctx, const char *arg, cmd_params_st *params
 	BoolMsg *rep;
 	unsigned status;
 	PROTOBUF_ALLOCATOR(pa, ctx);
-	
+
 	init_reply(&raw);
 
 	ret = send_cmd(ctx, CTL_CMD_STOP, NULL, NULL, NULL, &raw);
@@ -446,7 +446,7 @@ int handle_unban_ip_cmd(struct unix_ctx *ctx, const char *arg, cmd_params_st *pa
 		check_cmd_help(rl_line_buffer);
 		return 1;
 	}
-	
+
 	init_reply(&raw);
 
 	/* convert the IP to the simplest form */
@@ -468,8 +468,8 @@ int handle_unban_ip_cmd(struct unix_ctx *ctx, const char *arg, cmd_params_st *pa
 		return 1;
 	}
 
-	ret = send_cmd(ctx, CTL_CMD_UNBAN_IP, &req, 
-		(pack_size_func)unban_req__get_packed_size, 
+	ret = send_cmd(ctx, CTL_CMD_UNBAN_IP, &req,
+		(pack_size_func)unban_req__get_packed_size,
 		(pack_func)unban_req__pack, &raw);
 	if (ret < 0) {
 		goto error;
@@ -514,13 +514,13 @@ int handle_disconnect_user_cmd(struct unix_ctx *ctx, const char *arg, cmd_params
 		check_cmd_help(rl_line_buffer);
 		return 1;
 	}
-	
+
 	init_reply(&raw);
 
 	req.username = (void*)arg;
 
-	ret = send_cmd(ctx, CTL_CMD_DISCONNECT_NAME, &req, 
-		(pack_size_func)username_req__get_packed_size, 
+	ret = send_cmd(ctx, CTL_CMD_DISCONNECT_NAME, &req,
+		(pack_size_func)username_req__get_packed_size,
 		(pack_func)username_req__pack, &raw);
 	if (ret < 0) {
 		goto error;
@@ -569,13 +569,13 @@ int handle_disconnect_id_cmd(struct unix_ctx *ctx, const char *arg, cmd_params_s
 		check_cmd_help(rl_line_buffer);
 		return 1;
 	}
-	
+
 	init_reply(&raw);
 
 	req.id = id;
 
-	ret = send_cmd(ctx, CTL_CMD_DISCONNECT_ID, &req, 
-		(pack_size_func)id_req__get_packed_size, 
+	ret = send_cmd(ctx, CTL_CMD_DISCONNECT_ID, &req,
+		(pack_size_func)id_req__get_packed_size,
 		(pack_func)id_req__pack, &raw);
 	if (ret < 0) {
 		goto error;
@@ -1340,7 +1340,7 @@ int session_info_cmd(void *ctx, SecmListCookiesReplyMsg * args, FILE *out,
 			print_single_value_int(out, params, "in_use", args->cookies[i]->in_use, 1);
 		} else {
 			/* old names for compatibility */
-			print_pair_value(out, params, "In use", args->cookies[i]->in_use?"True":"False", 
+			print_pair_value(out, params, "In use", args->cookies[i]->in_use?"True":"False",
 					 "Activated", args->cookies[i]->session_is_open?"True":"False", 1);
 			print_single_value(out, params, "Certificate auth", args->cookies[i]->tls_auth_ok?"True":"False", 1);
 		}
@@ -1394,8 +1394,8 @@ int handle_show_user_cmd(struct unix_ctx *ctx, const char *arg, cmd_params_st *p
 
 	req.username = (void*)arg;
 
-	ret = send_cmd(ctx, CTL_CMD_USER_INFO, &req, 
-		(pack_size_func)username_req__get_packed_size, 
+	ret = send_cmd(ctx, CTL_CMD_USER_INFO, &req,
+		(pack_size_func)username_req__get_packed_size,
 		(pack_func)username_req__pack, &raw);
 	if (ret < 0) {
 		goto error;
@@ -1448,7 +1448,7 @@ int handle_events_cmd(struct unix_ctx *ctx, const char *arg, cmd_params_st *para
 
 	init_reply(&raw);
 
-	ret = send_cmd(ctx, CTL_CMD_TOP, NULL, 0, 0, &raw); 
+	ret = send_cmd(ctx, CTL_CMD_TOP, NULL, 0, 0, &raw);
 	if (ret < 0) {
 		goto error;
 	}
@@ -1628,8 +1628,8 @@ int handle_show_id_cmd(struct unix_ctx *ctx, const char *arg, cmd_params_st *par
 
 	req.id = id;
 
-	ret = send_cmd(ctx, CTL_CMD_ID_INFO, &req, 
-		(pack_size_func)id_req__get_packed_size, 
+	ret = send_cmd(ctx, CTL_CMD_ID_INFO, &req,
+		(pack_size_func)id_req__get_packed_size,
 		(pack_func)id_req__pack, &raw);
 	if (ret < 0) {
 		goto error;

@@ -79,7 +79,7 @@ ssize_t dtls_pull_latency(gnutls_transport_ptr_t ptr, void *data, size_t size)
 void send_latency_stats_delta_to_main(worker_st * ws, time_t now)
 {
 	LatencyStatsDelta msg = LATENCY_STATS_DELTA__INIT;
-	
+
 	if (ws->latency.sample_set_count == 0) {
 		return;
 	}
@@ -87,7 +87,7 @@ void send_latency_stats_delta_to_main(worker_st * ws, time_t now)
 	msg.median_delta = ws->latency.median_total;
 	msg.rms_delta = ws->latency.rms_total;
 	msg.sample_count_delta = ws->latency.sample_set_count;
-	
+
 	ws->latency.median_total = 0;
 	ws->latency.rms_total = 0;
 	ws->latency.sample_set_count = 0;

@@ -1,6 +1,6 @@
 # Intro
 
-To enforce isolation between clients and with the authenticating process, 
+To enforce isolation between clients and with the authenticating process,
 ocserv consists of 3 components; the main process, the security module and
 the worker processes. The following sections describe the purpose and tasks
 assigned to each component, and the last section describes the communication
@@ -15,11 +15,11 @@ See https://ocserv.gitlab.io/www/technical.html
 ## The main process
 
 The main component consists of the process which is tasked to:
- 
+
  * Listen for incoming TCP connections and fork/exec a new worker process
    to handle it. - See main.c
 
- * State is passed between main process and worker via an environment 
+ * State is passed between main process and worker via an environment
    variable.
 
  * Listen for incoming UDP "connections" and forward the packet stream
@@ -57,7 +57,7 @@ leaked during a fork(). It handles:
 
  * Partial certificate authentication. A user certificate received by the
    worker process, is verified by it, and on its SM_CMD_AUTH_INIT message
-   it indicates the verification status. The security module approves, 
+   it indicates the verification status. The security module approves,
    and performs any other authentication method necessary.
 
  * Gatekeeper for accounting information keeping and reporting. That is
@@ -107,7 +107,7 @@ device and the client. The tasks handled are:
 
 * Authentication
 
-``` 
+```
   main                 sec-mod                 worker
    |                       |                      |
    |                       |  <--SEC_AUTH_INIT--- |
@@ -151,7 +151,7 @@ device and the client. The tasks handled are:
 This is the same diagram as above but shows how the session ID (SID)
 is assigned and used throughout the server.
 
-``` 
+```
   main                  sec-mod                       worker
    |                       |                            |
    |                       |  <--SEC_AUTH_INIT---       |
@@ -209,7 +209,7 @@ The ocserv server gathers statistical data about the latency incurred while proc
 
 ## Load Balancer integration
 
-Ocserv can be deployed behind a layer 3 load balancer to support high availability and scale. 
+Ocserv can be deployed behind a layer 3 load balancer to support high availability and scale.
 
 ### Example load balancer configuration using keepalived.
 This is not intended as an exhaustive guide to configuring keepalived, but rather as a high level overview.
@@ -253,4 +253,4 @@ virtual_server fwmark 1 {
 
 * Set ocserv option "server-drain-ms = 10000" (2 times the health check interval) to permit graceful shutdown of ocserv instances. This setting adds a delay between the time when the server stops accepting new connections (which causes the load balancer to view it as unhealthy) and when existing clients are disconnected. This prevents clients from attempting to reconnect to a server that is shutting down or has recently shutdown.
 
-* Notes on sizing the HA cluster. Best practices for high availability are to maintain a minimum of two spare nodes as this permits for one node to be undergoing maintenance and for an unplanned failure on a second node. Each node should be sized to account for a rapid reconnect of all clients, which will cause a spike of CPU utilization due to TLS key exchange. The rate-limit-ms can be used to flatten the spike at the expense of some clients retrying their connections. 
+* Notes on sizing the HA cluster. Best practices for high availability are to maintain a minimum of two spare nodes as this permits for one node to be undergoing maintenance and for an unplanned failure on a second node. Each node should be sized to account for a rapid reconnect of all clients, which will cause a spike of CPU utilization due to TLS key exchange. The rate-limit-ms can be used to flatten the spike at the expense of some clients retrying their connections.

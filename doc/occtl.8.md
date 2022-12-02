@@ -9,7 +9,7 @@
 ## DESCRIPTION
 
 This a control tool that can be used to send commands to ocserv. When
-called without any arguments the tool can be used interactively, where 
+called without any arguments the tool can be used interactively, where
 each command is entered on a command prompt; alternatively the tool
 can be called with the command specified as parameter. In the latter
 case the tool's exit code will reflect the successful execution of

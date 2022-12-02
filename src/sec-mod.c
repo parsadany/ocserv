@@ -660,7 +660,7 @@ static void check_other_work(sec_mod_st *sec)
 		cleanup_client_entries(sec);
 		expire_tls_sessions(sec);
 		send_stats_to_main(sec);
-		seclog(sec, LOG_DEBUG, "active sessions %d", 
+		seclog(sec, LOG_DEBUG, "active sessions %d",
 			sec_mod_client_db_elems(sec));
 		alarm(MAINTAINANCE_TIME);
 		need_maintainance = 0;
@@ -712,7 +712,7 @@ int serve_request_main(sec_mod_st *sec, int fd, uint8_t *buffer, unsigned buffer
 	if (ret < 0) {
 		seclog(sec, LOG_ERR, "error processing data for '%s' command (%d)", cmd_request_to_str(cmd), ret);
 	}
-	
+
  leave:
 	return ret;
 }
@@ -754,7 +754,7 @@ int serve_request_worker(sec_mod_st *sec, int cfd, pid_t pid, uint8_t *buffer, u
 	if (ret < 0) {
 		seclog(sec, LOG_DEBUG, "error processing '%s' command (%d)", cmd_request_to_str(cmd), ret);
 	}
-	
+
  leave:
 	return ret;
 }
@@ -866,7 +866,7 @@ static int load_keys(sec_mod_st *sec, unsigned force)
  *
  * This is the main part of the security module.
  * It creates the unix domain socket identified by @socket_file
- * and then accepts connections from the workers to it. Then 
+ * and then accepts connections from the workers to it. Then
  * it serves commands requested on the server's private key.
  *
  * When the operation is decrypt the provided data are
@@ -884,7 +884,7 @@ static int load_keys(sec_mod_st *sec, unsigned force)
  * from main, and thus should be prevented from accessing
  * parts the key in stack or heap that was not zeroized.
  * Other than that it allows the main server to spawn
- * clients fast without becoming a bottleneck due to private 
+ * clients fast without becoming a bottleneck due to private
  * key operations.
  */
 void sec_mod_server(void *main_pool, void *config_pool, struct list_head *vconfig,
@@ -1076,7 +1076,7 @@ void sec_mod_server(void *main_pool, void *config_pool, struct list_head *vconfi
 				exit(1);
 			}
 		}
-		
+
 		if (FD_ISSET(sd, &rd_set)) {
 			sa_len = sizeof(sa);
 			cfd = accept(sd, (struct sockaddr *)&sa, &sa_len);

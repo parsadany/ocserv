@@ -208,7 +208,7 @@ int disable_system_calls(struct worker_st *ws)
 			break;
 		}
 	}
-#endif	
+#endif
 
 	/* this we need to get the MTU from
 	 * the TUN device */
@@ -228,7 +228,7 @@ int disable_system_calls(struct worker_st *ws)
 		ret = -1;
 		goto fail;
 	}
-	
+
 	ret = 0;
 
 fail:

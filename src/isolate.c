@@ -25,7 +25,7 @@
 
 #include <main.h>
 #include <limits.h>
- 
+
 void init_fd_limits_default(main_server_st * s)
 {
 #ifdef RLIMIT_NOFILE
@@ -54,7 +54,7 @@ void update_fd_limits(main_server_st * s, unsigned main)
 	int ret;
 
 	if (main) {
-		if (GETCONFIG(s)->max_clients > 0) 
+		if (GETCONFIG(s)->max_clients > 0)
 			max = MAX_FD_LIMIT(GETCONFIG(s)->max_clients);
 		else
 			// If the admin doesn't specify max_clients,
@@ -182,4 +182,3 @@ void drop_privileges(main_server_st * s)
 		      strerror(e));
 	}
 }
-

@@ -172,7 +172,7 @@ check_PROGRAMS = str-test str-test2 ipv4-prefix ipv6-prefix kkdcp-parsing json-e
 	port-parsing human_addr valid-hostname url-escape html-escape cstp-recv \
 	proxyproto-v1
 
-gen_oidc_test_data_CPPFLAGS = $(AM_CPPFLAGS) 
+gen_oidc_test_data_CPPFLAGS = $(AM_CPPFLAGS)
 gen_oidc_test_data_SOURCES = generate_oidc_test_data.c
 gen_oidc_test_data_LDADD = $(LDADD) $(CJOSE_LIBS) $(JANSSON_LIBS)
 

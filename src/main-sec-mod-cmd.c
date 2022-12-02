@@ -469,13 +469,13 @@ int session_open(sec_mod_instance_st * sec_mod_instance, struct proc_st *proc, c
 	ireq.sid.data = (void*)cookie;
 	ireq.sid.len = cookie_size;
 
-	if (proc->ipv4 && 
+	if (proc->ipv4 &&
 	    human_addr2((struct sockaddr *)&proc->ipv4->rip, proc->ipv4->rip_len,
 	    str_ipv4, sizeof(str_ipv4), 0) != NULL) {
 		ireq.ipv4 = str_ipv4;
 	}
 
-	if (proc->ipv6 && 
+	if (proc->ipv6 &&
 	    human_addr2((struct sockaddr *)&proc->ipv6->rip, proc->ipv6->rip_len,
 	    str_ipv6, sizeof(str_ipv6), 0) != NULL) {
 		ireq.ipv6 = str_ipv6;
@@ -565,7 +565,7 @@ int session_open(sec_mod_instance_st * sec_mod_instance, struct proc_st *proc, c
 
 static void reset_stats(main_server_st *s, time_t now)
 {
-	unsigned int i;	
+	unsigned int i;
 	unsigned long max_auth_time = 0;
 	unsigned long avg_auth_time = 0;
 	for (i = 0; i < s->sec_mod_instance_count; i ++) {
@@ -758,11 +758,11 @@ void run_sec_mod(sec_mod_instance_st * sec_mod_instance, unsigned int instance_i
 	int sfd[2];
 	pid_t pid;
 	const char *p;
-	
-	main_server_st * s = sec_mod_instance->server; 
+
+	main_server_st * s = sec_mod_instance->server;
 
 	/* fills sec_mod_instance->socket_file */
-	
+
 	snprintf(sec_mod_instance->socket_file, sizeof(sec_mod_instance->socket_file), "%s.%d", secmod_socket_file_name(GETPCONFIG(s)), instance_index);
 	mslog(s, NULL, LOG_DEBUG, "created sec-mod socket file (%s)", sec_mod_instance->socket_file);
 
@@ -824,4 +824,3 @@ void run_sec_mod(sec_mod_instance_st * sec_mod_instance, unsigned int instance_i
 		exit(1);
 	}
 }
-

@@ -36,7 +36,7 @@ struct script_wait_st *stmp;
 	stmp = talloc(s, struct script_wait_st);
 	if (stmp == NULL)
 		return;
-	
+
 	stmp->proc = proc;
 	stmp->pid = pid;
 

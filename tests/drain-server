@@ -51,7 +51,7 @@ echo "Connecting to obtain cookie... "
 ( echo "test" | LD_PRELOAD=libsocket_wrapper.so $OPENCONNECT -q $ADDRESS:$PORT -u test --servercert=d66b507ae074d03b02eafca40d35f87dd81049d3 --cookieonly ) &&
 	fail $PID "Server is still listening"
 
-wait 
+wait
 END_TIME=$(date +%s)
 if [ $((END_TIME - KILL_TIME)) -lt 9 ]]; then
 	fail $PID "Server died too early - signalled at $KILL_TIME died at $END_TIME"

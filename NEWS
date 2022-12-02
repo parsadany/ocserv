@@ -148,7 +148,7 @@
 
 * Version 0.12.0 (released 2018-04-22)
 - Allow DTLS stream to come from different IP from TLS stream.
-  There are situations where internet providers send the UDP 
+  There are situations where internet providers send the UDP
   stream from different IP (#61).
 - Increased possibilities of allowed combinations of authentication
   methods (#108).
@@ -218,7 +218,7 @@
 - Enhanced the cert-user-oid config option to read the SAN(rfc822name) value.
   In that case, the username will be read from the subject alternative
   name of the certificate rather than the DN. Based on patch by Johannes Sjøkvist.
-- Do not log the real internal session ID as part of occtl or radius, 
+- Do not log the real internal session ID as part of occtl or radius,
   but instead log a masked value. That ensures that access to log files or
   radius is not sufficient to access an existing session.
 - radius: Handle the special Framed-IP-Address values 255.255.255.254 and
@@ -362,7 +362,7 @@
   only a specific service to a specific server.
 - Switched to an event-driven design in main; using libev
 - occtl: Added the show events command to allow viewing the users connecting in
-  real time. 
+  real time.
 
 
 * Version 0.10.9 (released 2015-10-07)
@@ -537,7 +537,7 @@
 - Configuration option 'use-seccomp' was replaced by 'isolate-workers',
   which in addition to seccomp it enables the Linux namespaces restrictions.
 - Added support for stateless compression using LZ4 and LZS. This
-  is disabled by default. 
+  is disabled by default.
 
 
 * Version 0.8.9 (released 2014-12-10)
@@ -754,7 +754,7 @@
 - Better display of IP addresses in log messages.
 - Added the use-dbus configuration option. It can be used to disable
   the D-BUS service (and thus the usage of the occtl utility).
-- Added (optional) dependency on protocolbuffer-c, allowing a simpler 
+- Added (optional) dependency on protocolbuffer-c, allowing a simpler
   handling and easier extension of the internal IPC protocol.
 - Added configuration option cisco-client-compat which if enabled
   it allows a client to authenticate by sending its credentials in
@@ -805,7 +805,7 @@
   setting bandwidth limitations globally or per group/user.
 - Call setgroups() after setgid() to avoid propagation of supplementary groups
   to the unprivileged worker processes.
-- If a system's libopts is available as well as automake then the system's 
+- If a system's libopts is available as well as automake then the system's
   libopts will be used.
 - Added --pid-file command line option to ocserv. This overrides any
   configured pid-file.
@@ -833,7 +833,7 @@
 - Instead of suggesting different DTLS and CSTP MTU values, suggest a single
   value to the peer. That avoids issues with openconnect which reads one of
   the suggested values and ignores the other.
-- Added config option "output-buffer" to allow selecting between high throughput 
+- Added config option "output-buffer" to allow selecting between high throughput
   or low latency (following similar openconnect change).
 - Enabled config option "mtu".
 - Configuration file parsing was modified to allow detecting misspellings of
@@ -848,7 +848,7 @@
 
 * Version 0.1.5 (released 2013-07-15)
 
-- More robust support of PAM by allowing more than one factor 
+- More robust support of PAM by allowing more than one factor
   authentication. In practice this allows authentication with more than
   one password (e.g., with a permanent one and an one time password), as
   well as changing the password.
@@ -909,11 +909,11 @@
 
 * Version 0.0.2 (released 2013-03-05)
 
-- Updated HTTP protocol handling (fixes issue with openconnect < 4). 
+- Updated HTTP protocol handling (fixes issue with openconnect < 4).
   Reported by Mike Miller.
 - Use TCP wrappers (libwrap) when present.
 - Fixed issue with the 'local' keyword in DNS server.
-- Added configuration options 'user-profile' and 'always-require-cert' to 
+- Added configuration options 'user-profile' and 'always-require-cert' to
   enable non-openconnect clients to connect. They are enabled with
   the configure option --enable-anyconnect-compat.
 - Allow setting a rate limit on the number of connections.
@@ -927,4 +927,3 @@
 * Version 0.0.1 (released 2013-02-20)
 
 - First public release
-

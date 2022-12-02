@@ -924,4 +924,3 @@ size_t oc_strlcpy(char *dst, char const *src, size_t siz)
 }
 
 #endif
-

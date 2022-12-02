@@ -1003,7 +1003,7 @@ int post_common_handler(worker_st * ws, unsigned http_ver, const char *imsg)
 		if (WSCONFIG(ws)->xml_config_file) {
 			success_msg_foot = talloc_asprintf(ws, OC_SUCCESS_MSG_FOOT_PROFILE,
 				WSCONFIG(ws)->xml_config_file, WSCONFIG(ws)->xml_config_hash);
-		} 
+		}
 #endif
 
 		if (success_msg_foot == NULL) {
@@ -1095,13 +1095,13 @@ int post_common_handler(worker_st * ws, unsigned http_ver, const char *imsg)
 	if (ret < 0)
 		goto fail;
 
-	ret = 
+	ret =
 		add_owasp_headers(ws);
 	if (ret < 0)
 		goto fail;
 
 
-#ifdef ANYCONNECT_CLIENT_COMPAT	
+#ifdef ANYCONNECT_CLIENT_COMPAT
 	if (WSCONFIG(ws)->xml_config_file) {
 		ret =
 		    cstp_printf(ws,
@@ -1699,7 +1699,7 @@ int post_auth_handler(worker_st * ws, unsigned http_ver)
 	}
 
 	if (ret == ERR_AUTH_CONTINUE) {
-		
+
 		oclog(ws, LOG_DEBUG, "continuing authentication for '%s'",
 		      ws->username);
 		ws->auth_state = S_AUTH_REQ;
@@ -1753,4 +1753,3 @@ int post_auth_handler(worker_st * ws, unsigned http_ver)
  	talloc_free(msg);
  	return ret;
 }
-

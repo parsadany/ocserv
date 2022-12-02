@@ -384,13 +384,13 @@ const char* script, *next_script = NULL;
 			mslog(s, proc, LOG_ERR, "Could not execute script %s", script);
 			exit(1);
 		}
-			
+
 		exit(77);
 	} else if (pid == -1) {
 		mslog(s, proc, LOG_ERR, "Could not fork()");
 		return -1;
 	}
-	
+
 	if (type == SCRIPT_CONNECT) {
 		add_to_script_list(s, pid, proc);
 		return ERR_WAIT_FOR_SCRIPT;
@@ -408,7 +408,7 @@ add_utmp_entry(main_server_st *s, struct proc_st* proc)
 #ifdef HAVE_LIBUTIL
 	struct utmpx entry;
 	struct timespec tv;
-	
+
 	if (GETCONFIG(s)->use_utmp == 0)
 		return;
 
@@ -435,8 +435,8 @@ add_utmp_entry(main_server_st *s, struct proc_st* proc)
 
 #if defined(WTMPX_FILE)
 	updwtmpx(WTMPX_FILE, &entry);
-#endif   
-	
+#endif
+
 	return;
 #endif
 }
@@ -467,7 +467,7 @@ static void remove_utmp_entry(main_server_st *s, struct proc_st* proc)
 	entry.ut_tv.tv_sec = tv.tv_sec;
 	entry.ut_tv.tv_usec = tv.tv_nsec / 1000;
 	updwtmpx(WTMPX_FILE, &entry);
-#endif   
+#endif
 	return;
 #endif
 }
@@ -500,4 +500,3 @@ void user_disconnected(main_server_st *s, struct proc_st* proc)
 	remove_utmp_entry(s, proc);
 	call_script(s, proc, SCRIPT_DISCONNECT);
 }
-

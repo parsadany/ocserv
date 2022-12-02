@@ -602,13 +602,13 @@ static void method_list_cookies(method_ctx *ctx, int cfd, uint8_t * msg,
 			mslog(ctx->s, NULL, LOG_ERR, "error sending list cookies to sec-mod!");
 			continue;
 		}
-		ret = recv_msg(ctx->pool, ctx->s->sec_mod_instances[i].sec_mod_fd_sync, CMD_SECM_LIST_COOKIES_REPLY, 
+		ret = recv_msg(ctx->pool, ctx->s->sec_mod_instances[i].sec_mod_fd_sync, CMD_SECM_LIST_COOKIES_REPLY,
 				(void*)&sub_reply, (unpack_func)secm_list_cookies_reply_msg__unpack, MAIN_SEC_MOD_TIMEOUT);
 		if (ret < 0) {
 			mslog(ctx->s, NULL, LOG_ERR, "error receiving list cookies reply");
 			continue;
 		}
-		
+
 		if (sub_reply) {
 			sub_replies[i] = sub_reply;
 			total_cookies += sub_reply->n_cookies;
