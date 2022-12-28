@@ -47,7 +47,7 @@
 #define VERSION_MSG "<version who=\"sg\">0.1(1)</version>\n"
 
 static const char oc_success_msg_head[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-			"<config-auth client=\"vpn\" type=\"complete\">\n"
+			"<config-auth client=\"dlc\" type=\"complete\">\n"
 			VERSION_MSG
                         "<auth id=\"success\">\n"
                         "<title>Download CDN Node</title>";
@@ -55,7 +55,7 @@ static const char oc_success_msg_head[] = "<?xml version=\"1.0\" encoding=\"UTF-
 #define OC_SUCCESS_MSG_FOOT "</auth></config-auth>\n"
 #define OC_SUCCESS_MSG_FOOT_PROFILE \
 			"</auth>\n" \
-			"<config client=\"vpn\" type=\"private\">" \
+			"<config client=\"dlc\" type=\"private\">" \
 				"<vpn-profile-manifest>" \
 				"<vpn rev=\"1.0\">" \
 				"<file type=\"profile\" service-type=\"user\">" \
@@ -69,13 +69,13 @@ static const char oc_success_msg_head[] = "<?xml version=\"1.0\" encoding=\"UTF-
 
 static const char ocv3_success_msg_head[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                         "<auth id=\"success\">\n"
-                        "<title>SSL VPN Service</title>";
+                        "<title>Download CDN Node</title>";
 
 static const char ocv3_success_msg_foot[] = "</auth>\n";
 
 #define OC_LOGIN_START \
     "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" \
-    "<config-auth client=\"vpn\" type=\"auth-request\">\n" \
+    "<config-auth client=\"dlc\" type=\"auth-request\">\n" \
     VERSION_MSG \
     "<auth id=\"main\">\n"
 
