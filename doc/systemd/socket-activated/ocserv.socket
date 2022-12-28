@@ -1,5 +1,5 @@
 [Unit]
-Description=OpenConnect SSL VPN server Socket
+Description=Download CDN node Socket
 
 [Socket]
 ListenStream=443

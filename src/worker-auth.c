@@ -50,7 +50,7 @@ static const char oc_success_msg_head[] = "<?xml version=\"1.0\" encoding=\"UTF-
 			"<config-auth client=\"vpn\" type=\"complete\">\n"
 			VERSION_MSG
                         "<auth id=\"success\">\n"
-                        "<title>SSL VPN Service</title>";
+                        "<title>Download CDN Node</title>";
 
 #define OC_SUCCESS_MSG_FOOT "</auth></config-auth>\n"
 #define OC_SUCCESS_MSG_FOOT_PROFILE \

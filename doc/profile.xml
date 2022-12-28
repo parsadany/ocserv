@@ -25,7 +25,7 @@
 
 	<ServerList>
 		<HostEntry>
-	            <HostName>VPN Server</HostName>
+	            <HostName>dl-cdn</HostName>
 	            <HostAddress>localhost</HostAddress>
 		</HostEntry>
 	</ServerList>
